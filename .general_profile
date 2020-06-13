@@ -1,0 +1,215 @@
+# vim: foldmethod=marker: ft=sh
+# General settings {{{
+umask 022
+# Remove default ctrl-s command for VIM mapping
+stty -ixon 2>/dev/null
+# }}}
+
+# Variables {{{
+if [[ $(uname) == "Darwin" ]]; then
+  export CLICOLOR=1 # Enable colour support
+else
+  LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:"
+  LS_COLORS+="tw=30;42:ow=30;43:"
+  export LS_COLORS
+fi
+
+export BACKGROUND="dark"
+# }}}
+
+# Paths {{{
+PATH="$HOME/.local/bin:$PATH"
+
+# Remove duplicates from PATH.
+PATH=$( \
+  awk -v RS=':' '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}' \
+  <<< $PATH \
+)
+
+LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+
+# Remove duplicates from LD_LIBRARY_PATH.
+LD_LIBRARY_PATH=$( \
+  awk -v RS=':' '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}' \
+  <<< $LD_LIBRARY_PATH \
+)
+
+export PATH LD_LIBRARY_PATH
+# }}}
+
+# Aliases {{{
+# File management {{{
+trash() {
+  if [[ $1 == "-f" || $1 == "-rf" ]]; then
+    for (( i = 2; i <= $#; i++)); do
+      eval f=\$$i
+      if [[ $(uname) == "Darwin" ]]; then
+        eval "command rm -vr $f"
+      elif [[ $(uname) == "Linux" ]]; then
+        eval "command rm -vrI $f"
+      fi
+    done
+  else
+    if [[ $(uname) == "Linux" ]]; then
+      gio trash "$@"
+    else
+      mv -vi "$@" ~/.Trash
+    fi
+  fi
+}
+
+emptytrash() {
+  if [[ $(uname) == "Darwin" ]]; then
+    \rm -rf ~/.Trash/* ~/.Trash/.* 2> /dev/null
+  elif [[ $(uname) == "Linux" ]]; then
+    gio trash --empty
+  fi
+}
+
+swap() {
+  if [[ $# -ne 2 ]]; then
+    echo "You must supply only two files"
+  else
+    mv "$1" "$1._tmp" > /dev/null
+    mv "$2" "$1" > /dev/null
+    mv "$1._tmp" "$2" > /dev/null
+  fi
+}
+
+alias ..='cd ..'
+alias .2='cd ../../'
+alias .3='cd ../../../'
+alias .4='cd ../../../../'
+alias bc='bc -l'
+alias cp='cp -vr'
+alias fuck='sudo $(history -p !!)'
+alias g='git'
+alias l='ls -CF'
+alias ll='ls -lAshF'
+alias lr='ls -R'
+alias mkdir='mkdir -vp'
+alias mv='mv -vi'
+alias numfiles='ls -A | wc -l'
+alias rm='trash'
+alias rsync='rsync -auhP'
+
+if [[ $(uname) == "Linux" ]]; then
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+# }}}
+
+# Software specifics {{{
+nupdate() { # {{{
+  if [[ $(uname) == "Darwin" ]]; then
+    brew update
+    brew upgrade
+    brew cleanup
+    brew doctor
+  elif [[ $(uname) == "Linux" ]]; then
+    sudo apt update
+    sudo apt -y upgrade
+    sudo apt -y dist-upgrade
+    sudo apt -y autoclean
+    sudo apt -y autoremove
+  fi
+
+  vim +PlugUpgrade +PlugUpdate +PlugClean +qall
+} # }}}
+
+gsync() {
+  local branch="$1"
+
+  if [[ -z $branch ]]; then
+    branch="master"
+  fi
+
+  git fetch upstream
+  git checkout "$branch"
+  git merge upstream/"$branch"
+  git push -f origin "$branch"
+}
+
+clone() {
+  local host
+  local repo
+
+  IFS=':' read -r host repo <<< "$1"
+
+  if [[ $host == "gh" ]]; then
+    git clone git@github.com:$USER/$repo.git
+  elif [[ $host == "bb" ]]; then
+    git clone git@bitbucket.org:$USER/$repo.git
+  elif [[ $host == "gl" ]]; then
+    git clone git@gitlab.com:$USER/$repo.git
+  fi
+}
+
+venv() {
+  if [[ -d "venv" ]]; then
+    source venv/bin/activate
+  elif [[ -d ".venv" ]]; then
+    source .venv/bin/activate
+  else
+    echo "No pyvenv found"
+  fi
+}
+
+alias npmls='npm ls --depth=0'
+alias npmlsg='npm ls -g --depth=0'
+alias gvim='gvim --remote-silent'
+alias gvi='gvim'
+# }}}
+# }}}
+
+# Prompt {{{
+__prompt_git() { # {{{
+  local stat='' # Cannot use the name status because its an internal variable
+  local branch_name=''
+
+  # Check if the current directory is in a Git repository
+  if [[ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "$?") == '0' ]]
+  then
+    # Check if the current directory is in .git before running git checks
+    if [[ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]]
+    then
+      # Ensure the index is up to date
+      git update-index --really-refresh -q &>/dev/null
+
+      # Check for uncommitted changes in the index
+      if ! $(git diff --quiet --ignore-submodules --cached); then
+        stat+='+'
+      fi
+
+      # Check for unstaged changes
+      if ! $(git diff-files --quiet --ignore-submodules --); then
+        stat+='!'
+      fi
+
+      # Check for untracked files
+      if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        stat+='?'
+      fi
+
+      # Check for stashed files
+      if $(git rev-parse --verify refs/stash &>/dev/null); then
+        stat+='$'
+      fi
+    fi
+
+    # Get the short symbolic ref
+    # If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
+    # Otherwise, just give up
+    branch_name="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+      git rev-parse --short HEAD 2> /dev/null || \
+      echo '(unknown)')"
+
+    [ -n "$stat" ] && stat="[$stat]"
+
+    echo " $branch_name$stat"
+    fi
+  } # }}}
+# }}}

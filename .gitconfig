@@ -1,0 +1,8 @@
+[user]
+  name =
+  email =
+
+[alias]
+  cm = commit
+  co = checkout
+  st = status
