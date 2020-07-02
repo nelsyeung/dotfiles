@@ -1,4 +1,4 @@
-# vim: foldmethod=marker: ft=sh
+# vim: foldmethod=marker: ft=bash
 # General settings {{{
 umask 022
 # Remove default ctrl-s command for VIM mapping

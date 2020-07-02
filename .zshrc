@@ -1,4 +1,4 @@
-# vim: foldmethod=marker: ft=zsh
+# vim: foldmethod=marker
 # General settings {{{
 # Source global definitions
 if [[ -f /etc/zshrc ]]; then

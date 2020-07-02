@@ -1,4 +1,4 @@
-# vim: foldmethod=marker: ft=sh
+# vim: foldmethod=marker
 # General settings {{{
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
