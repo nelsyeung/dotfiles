@@ -3,6 +3,8 @@
 dotfiles that works on both macOS and Linux, and with bash and zsh. It contains
 a custom prompt, useful aliases, Vim configurations and Tmux configurations.
 
+![Terminal screenshot](../media/terminal.png?raw=true)
+
 ## Getting started
 
 Make sure a font with powerline is installed. For example, [Cascadia
