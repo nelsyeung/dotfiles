@@ -64,9 +64,9 @@ endif
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 
-Plug 'Shougo/denite.nvim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
@@ -80,7 +80,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
 " Interface
-Plug 'gkapfham/vim-vitamin-onec'
+Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -91,16 +91,14 @@ Plug 'thosakwe/vim-flutter'
 call plug#end()
 
 " Settings
-let g:OmniSharp_server_use_mono = 1
 let g:ale_fixers = {
-  \ 'dart': ['dartfmt'],
-  \ 'python': ['black'],
-  \ 'javascript': ['prettier'],
   \ 'css': ['prettier'],
+  \ 'dart': ['dartfmt'],
+  \ 'javascript': ['prettier'],
+  \ 'python': ['black'],
 \ }
 let g:ale_linters = {
   \ 'dart': ['analysis_server'],
-  \ 'cs': ['OmniSharp'],
   \ 'python': ['flake8', 'pyls'],
   \ 'tex': ['chktex'],
 \ }
@@ -110,39 +108,15 @@ let g:ale_cpp_gcc_options = '-std=c++17 -Wall -Wextra'
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
+let g:ctrlp_map = '<Leader>f'
 let g:indentLine_char = '|'
 let g:indentLine_color_gui = '#1e1e1e'
 let g:vim_markdown_conceal = 0
-let g:vimtex_quickfix_enabled = 0
-
-call denite#custom#var('grep', 'recursive_opts', [
-  \ '-r',
-  \ '--exclude-dir=.git',
-  \ '--exclude-dir=.*cache',
-  \ '--exclude-dir=node_modules',
-  \ '--exclude-dir=.meteor',
-  \ '--exclude-dir=__pycache__',
-  \ '--exclude-dir=.*env',
-\ ])
-call denite#custom#var('file/rec', 'command', [
-  \ 'scantree.py', '--path', ':directory',
-  \ '--ignore',
-  \ '.git,.*cache,node_modules,.meteor,__pycache__,.*env,*.pyc,*.swp'
-\ ])
 " }}}
 
 " Interface {{{
-colorscheme vitaminonec
-hi Normal guibg=#000000
-hi Cursor guifg=#ffffff guibg=#ffb472
-hi Folded ctermbg=0 guibg=#000000
-hi ColorColumn guibg=#0F0F0F
-let g:airline_theme='minimalist'
-
-hi tsxTagName ctermfg=4 guifg=#268BD2
-hi tsxCloseString ctermfg=4 guifg=#268BD2
-hi tsxCloseTag ctermfg=4 guifg=#268BD2
-
+colorscheme solarized8_flat
+let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_y = airline#section#create([
@@ -225,22 +199,9 @@ nnoremap > <C-w>>
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap gh :ALEHover<CR>
 map <Leader>r <Plug>(quickrun)
-nnoremap <Leader>f :Denite buffer file/rec<CR>
-nnoremap <Leader>g :Denite grep<CR>
 " }}}
 
 " Functions {{{
-function! s:denite_mappings() abort
-  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-endfunction
-
-function! s:denite_filter_mappings() abort
-  imap <silent><buffer> <C-j> <Plug>(denite_filter_quit)
-endfunction
 " }}}
 
 " Auto Commands {{{
@@ -248,15 +209,10 @@ augroup autocommands
   au!
   au BufNewFile,BufRead * if &filetype == '' | set foldlevel=99 | endif
   au BufNewFile,BufRead *.jsx.snap set filetype=jsx
-  au BufNewFile,BufRead *.php set filetype=php.html textwidth=150
+  au BufNewFile,BufRead *.php set filetype=php.html
   au BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-  au FileType cs setl textwidth=120
-  au FileType denite call s:denite_mappings()
-  au FileType denite-filter call s:denite_filter_mappings()
-  au FileType fortran setl noai nocin nosi inde=
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
-  au FileType python setl textwidth=88
   au FileType tex setl spell
 augroup END
 " }}}
