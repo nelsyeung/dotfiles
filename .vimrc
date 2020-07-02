@@ -115,6 +115,7 @@ let g:vim_markdown_conceal = 0
 " }}}
 
 " Interface {{{
+set background=dark
 colorscheme solarized8_flat
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
