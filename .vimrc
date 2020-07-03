@@ -95,6 +95,7 @@ let g:ale_fixers = {
   \ 'css': ['prettier'],
   \ 'dart': ['dartfmt'],
   \ 'javascript': ['prettier'],
+  \ 'javascriptreact': ['prettier'],
   \ 'python': ['black'],
 \ }
 let g:ale_linters = {
@@ -211,7 +212,6 @@ augroup autocommands
   au BufNewFile,BufRead * if &filetype == '' | set foldlevel=99 | endif
   au BufNewFile,BufRead *.jsx.snap set filetype=jsx
   au BufNewFile,BufRead *.php set filetype=php.html
-  au BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
   au FileType tex setl spell
