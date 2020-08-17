@@ -81,18 +81,22 @@ alias ..='cd ..'
 alias .2='cd ../../'
 alias .3='cd ../../../'
 alias .4='cd ../../../../'
+alias .5='cd ../../../../../'
 alias bc='bc -l'
 alias cp='cp -vr'
 alias fuck='sudo $(history -p !!)'
 alias g='git'
+alias gv='gvim --remote-silent'
+alias gv='gvim'
 alias l='ls -CF'
 alias ll='ls -lAshF'
 alias lr='ls -R'
-alias mkdir='mkdir -vp'
+alias md='mkdir -vp'
 alias mv='mv -vi'
 alias numfiles='ls -A | wc -l'
 alias rm='trash'
 alias rsync='rsync -auhP'
+alias v='vim'
 
 if [[ $(uname) == "Linux" ]]; then
   alias ls='ls --color=auto'
@@ -105,16 +109,10 @@ fi
 # Software specifics {{{
 nupdate() { # {{{
   if [[ $(uname) == "Darwin" ]]; then
-    brew update
-    brew upgrade
-    brew cleanup
-    brew doctor
+    brew update; brew upgrade; brew cleanup; brew doctor
   elif [[ $(uname) == "Linux" ]]; then
-    sudo apt update
-    sudo apt -y upgrade
-    sudo apt -y dist-upgrade
-    sudo apt -y autoclean
-    sudo apt -y autoremove
+    sudo apt update; sudo apt -y upgrade; sudo apt -y dist-upgrade
+    sudo apt -y autoclean; sudo apt -y autoremove
   fi
 
   vim +PlugUpgrade +PlugUpdate +PlugClean +qall
@@ -158,10 +156,36 @@ venv() {
   fi
 }
 
+dclean() {
+  containers=$(docker ps -aq)
+  images=$(docker images -aq)
+  volumes=$(docker volume ls -q)
+  networks=$(docker network ls -q)
+
+  [ -z "$containers" ] && echo "No containers" || docker rm $containers
+  [ -z "$images" ] && echo "No images" || docker rmi $images
+  [ -z "$volumes" ] && echo "No volumes" || docker volume rm $volumes
+  [ "$(echo "$networks" | wc -l)" -le 3 ] && 
+    echo "No networks" || docker network rm $networks
+}
+
+dex() { docker exec -it $1 ${2:-bash} }
+drm() { docker stop $1; docker rm $1 }
+
+alias dc='docker-compose'
+alias dcd='docker-compose down'
+alias dcr='docker-compose run'
+alias dcu='docker-compose up -d'
+alias di='docker inspect'
+alias dim='docker images'
+alias dl='docker logs -f'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias drmc='docker rm $(docker ps -aqf status=exited)'
+alias drmi='docker rmi $(docker images -aqf dangling=true)'
+alias drun='docker run -it'
 alias npmls='npm ls --depth=0'
 alias npmlsg='npm ls -g --depth=0'
-alias gvim='gvim --remote-silent'
-alias gvi='gvim'
 # }}}
 # }}}
 
