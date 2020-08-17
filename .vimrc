@@ -5,6 +5,7 @@ set autoread
 set clipboard=unnamedplus
 set display+=lastline
 set encoding=utf-8
+set expandtab
 set fillchars=vert:\ ,fold:\ " Must keep the space after the backslash
 set foldmethod=indent
 set formatoptions+=j " Delete comment character when joining commented lines
@@ -15,7 +16,7 @@ set incsearch
 set laststatus=2
 set lazyredraw
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-set expandtab
+set modeline
 set noshowmode " Mode is shown using airline instead
 set number
 set ruler
