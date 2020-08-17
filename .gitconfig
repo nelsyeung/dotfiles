@@ -3,6 +3,16 @@
   email =
 
 [alias]
-  cm = commit
+  a = add
+  c = commit
+  cl = clone
   co = checkout
-  st = status
+  d = diff
+  p = pull
+  ph = push
+  r = rebase
+  s = status
+  sh = stash
+
+[core]
+	editor = vim
