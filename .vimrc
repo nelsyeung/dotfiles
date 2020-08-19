@@ -93,11 +93,12 @@ call plug#end()
 
 " Settings
 let g:ale_fixers = {
-  \ 'css': ['prettier'],
+  \ 'css': ['prettier', 'stylelint'],
   \ 'dart': ['dartfmt'],
   \ 'javascript': ['prettier'],
   \ 'javascriptreact': ['prettier'],
   \ 'python': ['black'],
+  \ 'scss': ['prettier', 'stylelint'],
   \ 'typescript': ['prettier'],
   \ 'typescriptreact': ['prettier'],
 \ }
