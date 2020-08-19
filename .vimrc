@@ -98,6 +98,8 @@ let g:ale_fixers = {
   \ 'javascript': ['prettier'],
   \ 'javascriptreact': ['prettier'],
   \ 'python': ['black'],
+  \ 'typescript': ['prettier'],
+  \ 'typescriptreact': ['prettier'],
 \ }
 let g:ale_linters = {
   \ 'dart': ['analysis_server'],
