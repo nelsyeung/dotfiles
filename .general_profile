@@ -157,16 +157,17 @@ venv() {
 }
 
 dclean() {
-  containers=$(docker ps -aq)
-  images=$(docker images -aq)
-  volumes=$(docker volume ls -q)
-  networks=$(docker network ls -q)
+  [ -z "$(docker ps -aq)" ] &&
+    echo "No containers" || docker rm $(docker ps -aq)
 
-  [ -z "$containers" ] && echo "No containers" || docker rm $containers
-  [ -z "$images" ] && echo "No images" || docker rmi $images
-  [ -z "$volumes" ] && echo "No volumes" || docker volume rm $volumes
-  [ "$(echo "$networks" | wc -l)" -le 3 ] && 
-    echo "No networks" || docker network rm $networks
+  [ -z "$(docker images -aq)" ] &&
+    echo "No images" || docker rmi $(docker images -aq)
+
+  [ -z "$(docker volume ls -q)" ] &&
+    echo "No volumes" || docker volume rm $(docker volume ls -q)
+
+  [ "$(echo "$(docker network ls -q)" | wc -l)" -le 3 ] && 
+    echo "No networks" || docker network rm "$networks"
 }
 
 dex() { docker exec -it $1 ${2:-bash} }
