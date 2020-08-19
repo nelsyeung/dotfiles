@@ -71,7 +71,7 @@ __prompt_command() { # {{{
     green="%{$(tput setaf 64)%}"
     yellow="%{$(tput setaf 136)%}"
     orange="%{$(tput setaf 166)%}"
-    blue="%{$(tput setaf 33)%}"
+    blue="%{$(tput setaf 32)%}"
     purple="%{$(tput setaf 125)%}"
     violet="%{$(tput setaf 61)%}"
     cyan="%{$(tput setaf 37)%}"
@@ -91,7 +91,7 @@ __prompt_command() { # {{{
 
   PROMPT+="$orange@%m "
   PROMPT+="${foreground}: "
-  PROMPT+="$red%~ "  # Working directory full path
+  PROMPT+="$cyan%~ "  # Working directory full path
   PROMPT+="$violet"'$(__prompt_git)'"$reset "  # Git branch and status
 
   # Add an extra line before the command input if terminal is big
