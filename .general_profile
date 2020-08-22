@@ -86,6 +86,7 @@ alias bc='bc -l'
 alias cp='cp -vr'
 alias fuck='sudo $(history -p !!)'
 alias g='git'
+alias grep='grep --color=auto'
 alias gv='gvim --remote-silent'
 alias gv='gvim'
 alias l='ls -CF'
@@ -100,9 +101,6 @@ alias v='vim'
 
 if [[ $(uname) == "Linux" ]]; then
   alias ls='ls --color=auto'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
 fi
 # }}}
 
