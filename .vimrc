@@ -7,7 +7,6 @@ set display+=lastline
 set encoding=utf-8
 set expandtab
 set fillchars=vert:\ ,fold:\ " Must keep the space after the backslash
-set foldmethod=indent
 set formatoptions+=j " Delete comment character when joining commented lines
 set hidden " Allows opening a new buffer with unsaved changes
 set hlsearch
@@ -214,9 +213,6 @@ map <Leader>r <Plug>(quickrun)
 " Auto Commands {{{
 augroup autocommands
   au!
-  au BufNewFile,BufRead * if &filetype == '' | set foldlevel=99 | endif
-  au BufNewFile,BufRead *.jsx.snap set filetype=jsx
-  au BufNewFile,BufRead *.php set filetype=php.html
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
   au FileType tex setl spell
