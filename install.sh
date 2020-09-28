@@ -1,3 +1,5 @@
+#!/bin/bash
+
 install() {
   local cmd=""
   local exclude=(
