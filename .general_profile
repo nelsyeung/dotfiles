@@ -114,6 +114,8 @@ nup() { # {{{
   fi
 
   vim +PlugUpgrade +PlugUpdate +PlugClean +qall
+
+  type _system_nup > /dev/null && _system_nup || return 0
 } # }}}
 
 gsync() {
