@@ -8,6 +8,7 @@ set encoding=utf-8
 set expandtab
 set fillchars=vert:\ ,fold:\ " Must keep the space after the backslash
 set formatoptions+=j " Delete comment character when joining commented lines
+set gdefault
 set hidden " Allows opening a new buffer with unsaved changes
 set hlsearch
 set ignorecase
