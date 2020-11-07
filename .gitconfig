@@ -10,21 +10,34 @@
   co = checkout
   d = difftool
   df = diff
-  l = log
+  fix = commit --fixup=HEAD
+  l = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
   p = pull
   ph = push
   r = rebase
   s = status
   sh = stash
+  unc = reset --soft HEAD~1
 
 [core]
 	editor = vim
-
-[remote "origin"]
-	prune = true
 
 [diff]
 	tool = vimdiff
 
 [difftool]
 	prompt = false
+
+[log]
+  abbrevCommit = true
+  follow = true
+
+[rebase]
+	autosquash = true
+
+[remote "origin"]
+	prune = true
+
+[status]
+  submoduleSummary = true
+  showUntrackedFiles = all
