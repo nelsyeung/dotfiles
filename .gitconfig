@@ -8,7 +8,8 @@
   c = commit
   cl = clone
   co = checkout
-  d = diff
+  d = difftool
+  df = diff
   l = log
   p = pull
   ph = push
@@ -21,3 +22,9 @@
 
 [remote "origin"]
 	prune = true
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
