@@ -103,6 +103,8 @@ fi
 
 # Software specifics {{{
 nup() { # {{{
+  type _pre_nup > /dev/null && _pre_nup
+
   if [[ $(uname) == "Darwin" ]]; then
     brew update; brew upgrade; brew cleanup; brew doctor
   elif [[ $(uname) == "Linux" ]]; then
@@ -112,7 +114,7 @@ nup() { # {{{
 
   vim +PlugUpgrade +PlugUpdate +PlugClean +qall
 
-  type _system_nup > /dev/null && _system_nup || return 0
+  type _post_nup > /dev/null && _post_nup || return 0
 } # }}}
 
 gsync() {
