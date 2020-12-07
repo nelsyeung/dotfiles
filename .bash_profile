@@ -1,4 +1,4 @@
-# vim: foldmethod=marker
+# vim: foldmethod=marker: ft=bash
 # General settings {{{
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
@@ -34,60 +34,18 @@ __venv_info() {  # {{{
 }  # }}}
 
 __prompt_command() {  # {{{
-  local exit_status="$?"
-  PS1="$(__venv_info)"
-  local reset="\[\e[0m\]"
-  local black="\[\e[0;30m\]"
-  local red="\[\e[0;31m\]"
-  local green="\[\e[0;32m\]"
-  local yellow="\[\e[0;33m\]"
-  local orange="\[\e[1;33m\]"
-  local blue="\[\e[0;34m\]"
-  local purple="\[\e[0;35m\]"
-  local violet="\[\e[0;35m\]"
-  local cyan="\[\e[0;36m\]"
-  local white="\[\e[0;37m\]"
+  local -r exit_status=$?
+  local -r lines=$(tput lines)
+  local -r reset_color="\[\e[0m\]"
 
-  if tput setaf 1 &> /dev/null; then
-    tput sgr0 # reset colors
-    reset="\[$(tput sgr0)\]"
-    black="\[$(tput setaf 0)\]"
-    red="\[$(tput setaf 1)\]"
-    green="\[$(tput setaf 64)\]"
-    yellow="\[$(tput setaf 136)\]"
-    orange="\[$(tput setaf 166)\]"
-    blue="\[$(tput setaf 32)\]"
-    purple="\[$(tput setaf 125)\]"
-    violet="\[$(tput setaf 61)\]"
-    cyan="\[$(tput setaf 37)\]"
-    white="\[$(tput setaf 15)\]"
-  fi
-
-  local foreground=$black
-
-  if [[ $BACKGROUND == "dark" ]]; then
-    foreground=$white
-  fi
-
-  local exit_color=$foreground
-  local cols=$(tput cols)
-  local lines=$(tput lines)
-  local min_lines=6  # Minimum terminal size before prompt changes
-
-  PS1+="$orange@\h "
-  PS1+="${foreground}: "
-  PS1+="$cyan\w "  # Working directory full path
-  PS1+="$violet\$(__prompt_git)$reset "  # Git branch and status
-
-  # Add an extra line before the command input if terminal is big
-  [[ $lines -ge $min_lines ]] && PS1+="\n"
-
-  # If last command failed show '$' in red instead of green
-  if [[ $exit_status -gt 0 ]]; then
-    exit_color=$red
-  fi
-
-  PS1+="$exit_color$ $reset"  # '$' and reset color
+  [[ $lines -ge $__prompt__min_lines ]] && PS1="\n" || PS1=""
+  PS1+="$(__venv_info)"
+  PS1+="\[\e[0;35m\]@\h$reset_color: "
+  PS1+="\[\e[0;33m\]\w"  # Working directory full path
+  PS1+="\[\e[0;36m\]\$(__prompt_git)"  # Git branch and status
+  [[ $lines -ge $__prompt__min_lines ]] && PS1+="\n "
+  PS1+="$([[ $exit_status -eq 0 ]] && echo $reset_color || echo "\[\e[0;31m\]")"
+  PS1+=" ==>\[\e[0;37m\] "
 }  # }}}
 
 export PROMPT_COMMAND=__prompt_command

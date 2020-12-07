@@ -114,7 +114,7 @@ nup() { # {{{
 
   vim +PlugUpgrade +PlugUpdate +PlugClean +qall
 
-  type _post_nup > /dev/null && _post_nup || return 0
+  type _post_nup > /dev/null && _post_nup
 } # }}}
 
 gsync() {
@@ -169,8 +169,8 @@ dclean() {
     echo "No networks" || docker network rm "$networks"
 }
 
-dex() { docker exec -it $1 ${2:-bash} }
-drm() { docker stop $1; docker rm $1 }
+dex() { docker exec -it $1 ${2:-bash}; }
+drm() { docker stop $1; docker rm $1; }
 
 alias dc='docker-compose'
 alias dcd='docker-compose down'
@@ -191,15 +191,17 @@ alias npmlsg='npm ls -g --depth=0'
 # }}}
 
 # Prompt {{{
+__prompt__min_lines=10  # Minimum terminal size before prompt changes
+
 __prompt_git() { # {{{
   local stat='' # Cannot use the name status because its an internal variable
   local branch_name=''
 
   # Check if the current directory is in a Git repository
-  if [[ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "$?") == '0' ]]
+  if [[ $(git rev-parse --is-inside-work-tree &>/dev/null; echo $?) -eq 0 ]]
   then
     # Check if the current directory is in .git before running git checks
-    if [[ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]]
+    if [[ $(git rev-parse --is-inside-git-dir 2> /dev/null) == false ]]
     then
       # Ensure the index is up to date
       git update-index --really-refresh -q &>/dev/null
@@ -234,7 +236,7 @@ __prompt_git() { # {{{
 
     [ -n "$stat" ] && stat="[$stat]"
 
-    echo " $branch_name$stat"
-    fi
-  } # }}}
+    echo "  $branch_name$stat"
+  fi
+} # }}}
 # }}}

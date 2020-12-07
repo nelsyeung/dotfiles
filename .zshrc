@@ -48,63 +48,24 @@ zstyle ':completion:*' matcher-list '' \
   # }}}
 
 # Prompt {{{
+TRAPWINCH() {
+  __prompt_command
+}
+
+preexec() {
+  print -nP "%f"
+}
+
 __prompt_command() { # {{{
-  local exit_status="$?"
-  PROMPT=""
-  local reset="%{\e[0%}"
-  local black="%{\e[0;30%}"
-  local red="%{\e[0;31%}"
-  local green="%{\e[0;32%}"
-  local yellow="%{\e[0;33%}"
-  local orange="%{\e[1;33%}"
-  local blue="%{\e[0;34%}"
-  local purple="%{\e[0;35%}"
-  local violet="%{\e[0;35%}"
-  local cyan="%{\e[0;36%}"
-  local white="%{\e[0;37%}"
+  local -r lines=$(tput lines)
+  local -r reset_color="%f"
 
-  if tput setaf 1 &> /dev/null; then
-    tput sgr0 # reset colors
-    reset="%{$(tput sgr0)%}"
-    black="%{$(tput setaf 0)%}"
-    red="%{$(tput setaf 1)%}"
-    green="%{$(tput setaf 64)%}"
-    yellow="%{$(tput setaf 136)%}"
-    orange="%{$(tput setaf 166)%}"
-    blue="%{$(tput setaf 32)%}"
-    purple="%{$(tput setaf 125)%}"
-    violet="%{$(tput setaf 61)%}"
-    cyan="%{$(tput setaf 37)%}"
-    white="%{$(tput setaf 15)%}"
-  fi
-
-  local foreground=$black
-
-  if [[ $BACKGROUND == "dark" ]]; then
-    foreground=$white
-  fi
-
-  local exit_color=$foreground
-  local cols=$(tput cols)
-  local lines=$(tput lines)
-  local min_lines=6  # Minimum terminal size before prompt changes
-
-  PROMPT+="$orange@%m "
-  PROMPT+="${foreground}: "
-  PROMPT+="$cyan%~ "  # Working directory full path
-  PROMPT+="$violet"'$(__prompt_git)'"$reset "  # Git branch and status
-
-  # Add an extra line before the command input if terminal is big
-  [[ $lines -ge $min_lines ]] && PROMPT+=$'\n'
-
-  # If last command failed show '$' in red instead of green
-  if [[ $exit_status -gt 0 ]]; then
-    exit_color=$red
-  fi
-
-  exit_color="%(?:%{$foreground%}:%{$red%})"
-
-  PROMPT+="$exit_color$ $reset"  # '$' and reset color
+  [[ $lines -ge $__prompt__min_lines ]] && PROMPT=$'\n' || PROMPT=""
+  PROMPT+="%F{magenta}@%m$reset_color: "
+  PROMPT+="%F{yellow}%~"  # Working directory full path
+  PROMPT+="%F{cyan}\$(__prompt_git)"  # Git branch and status
+  [[ $lines -ge $__prompt__min_lines ]] && PROMPT+=$'\n'
+  PROMPT+="%(?:%{$reset_color%}:%{%F{red}%}) ==>%F{white} "
 }  # }}}
 
 __prompt_command
