@@ -6,7 +6,7 @@ set clipboard=unnamedplus
 set display+=lastline
 set encoding=utf-8
 set expandtab
-set fillchars=vert:\ ,fold:\ " Must keep the space after the backslash
+set fillchars+=fold:\ " Must keep the space after the backslash
 set formatoptions+=j " Delete comment character when joining commented lines
 set gdefault
 set hidden " Allows opening a new buffer with unsaved changes
@@ -17,6 +17,7 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set modeline
+set mouse=a
 set noshowmode " Mode is shown using airline instead
 set number
 set ruler
@@ -82,7 +83,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
 " Interface
-Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-colortemplate'
+Plug 'nelsyeung/high-contrast', { 'rtp': 'vim' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -116,15 +118,14 @@ let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
 let g:ctrlp_map = '<Leader>f'
 let g:indentLine_char = '|'
-let g:indentLine_color_gui = '#1e1e1e'
+let g:indentLine_color_gui = '#282828'
 let g:vim_markdown_conceal = 0
 " }}}
 
 " Interface {{{
 set background=dark
-colorscheme solarized8_flat
-let g:airline_theme='solarized'
-let g:airline_powerline_fonts = 1
+colorscheme high_contrast
+let g:airline_theme='simple'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_y = airline#section#create([
   \ '%L' . g:airline_symbols.maxlinenr
