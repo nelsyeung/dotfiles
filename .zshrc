@@ -65,7 +65,7 @@ __prompt_command() { # {{{
   PROMPT+="%F{yellow}%~"  # Working directory full path
   PROMPT+="%F{cyan}\$(__prompt_git)"  # Git branch and status
   [[ $lines -ge $__prompt__min_lines ]] && PROMPT+=$'\n'
-  PROMPT+="%(?:%{$reset_color%}:%{%F{red}%}) ==>%F{white} "
+  PROMPT+="%(?:%{$reset_color%}:%{%F{red}%}) ==>$reset_color "
 }  # }}}
 
 __prompt_command
