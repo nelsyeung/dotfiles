@@ -15,6 +15,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set lazyredraw
+set linespace=4
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set modeline
 set mouse=a
