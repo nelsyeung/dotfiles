@@ -145,13 +145,30 @@ clone() {
 }
 
 venv() {
-  if [[ -d "venv" ]]; then
-    source venv/bin/activate
-  elif [[ -d ".venv" ]]; then
-    source .venv/bin/activate
-  else
-    echo "No pyvenv found"
-  fi
+  local search_path="$(pwd)"
+
+  activate_venv() {
+    local activate_path="$search_path/.venv/bin/activate"
+
+    if ls "$activate_path" > /dev/null 2>&1 ; then
+      deactivate 2> /dev/null
+      source "$activate_path"
+      return
+    fi
+
+    search_path="$(dirname "$search_path")"
+    [ "$search_path" = "/" ] && return
+
+    activate_venv
+    return $?
+  }
+
+  activate_venv
+}
+
+cd() {
+  builtin cd $1
+  venv
 }
 
 dclean() {
