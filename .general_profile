@@ -173,13 +173,13 @@ cd() {
 
 dclean() {
   [ -z "$(docker ps -aq)" ] &&
-    echo "No containers" || docker rm $(docker ps -aq)
+    echo "No containers" || docker rm -f $(docker ps -aq)
 
   [ -z "$(docker images -aq)" ] &&
-    echo "No images" || docker rmi $(docker images -aq)
+    echo "No images" || docker rmi -f $(docker images -aq)
 
   [ -z "$(docker volume ls -q)" ] &&
-    echo "No volumes" || docker volume rm $(docker volume ls -q)
+    echo "No volumes" || docker volume prune
 
   [ "$(echo "$(docker network ls -q)" | wc -l)" -le 3 ] &&
     echo "No networks" || docker network rm "$networks"
