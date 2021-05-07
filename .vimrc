@@ -24,6 +24,7 @@ set number
 set ruler
 set scrolloff=3
 set shiftwidth=2
+set shortmess+=c
 set showcmd " Shows the number of lines selected
 set sidescrolloff=5
 set signcolumn=yes
@@ -70,12 +71,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'thinca/vim-quickrun'
@@ -96,28 +97,8 @@ Plug 'thosakwe/vim-flutter'
 call plug#end()
 
 " Settings
-let g:ale_fixers = {
-  \ 'css': ['prettier', 'stylelint'],
-  \ 'dart': ['dartfmt'],
-  \ 'javascript': ['prettier'],
-  \ 'javascriptreact': ['prettier'],
-  \ 'python': ['black'],
-  \ 'scss': ['prettier', 'stylelint'],
-  \ 'typescript': ['prettier'],
-  \ 'typescriptreact': ['prettier'],
-\ }
-let g:ale_linters = {
-  \ 'dart': ['analysis_server'],
-  \ 'python': ['flake8', 'pyls'],
-  \ 'tex': ['chktex'],
-\ }
-let g:ale_completion_enabled = 1
-let g:ale_cpp_clang_options = '-std=c++17 -Wall -Wextra'
-let g:ale_cpp_gcc_options = '-std=c++17 -Wall -Wextra'
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
-let g:ctrlp_map = '<Leader>f'
+let g:coc_global_extensions = ['coc-flutter', 'coc-json', 'coc-pyright']
+let g:ctrlp_map = '<leader>f'
 let g:indentLine_char = '|'
 let g:indentLine_color_gui = '#282828'
 let g:vim_markdown_conceal = 0
@@ -138,35 +119,35 @@ let g:airline_section_z = airline#section#create(['%2v'])
 let mapleader=','
 let maplocalleader='\\'
 
-nnoremap <C-s> :update<CR>
-inoremap <C-s> <Esc>:update<CR>
+nnoremap <c-s> :update<cr>
+inoremap <c-s> <Esc>:update<cr>
 cmap w!! w !sudo -E tee > /dev/null %
-nnoremap <F12> :syntax sync fromstart<CR>
-inoremap <F12> :syntax sync fromstart<CR>
+nnoremap <F12> :syntax sync fromstart<cr>
+inoremap <F12> :syntax sync fromstart<cr>
 
 " Toggles
-nnoremap tl :set list!<CR>
-nnoremap tu :UndotreeToggle<CR>
-nnoremap tc :set cursorline! cursorcolumn!<CR>
-nnoremap tp :set paste!<CR>
-nnoremap ts :set spell!<CR>
+nnoremap tl :set list!<cr>
+nnoremap tu :UndotreeToggle<cr>
+nnoremap tc :set cursorline! cursorcolumn!<cr>
+nnoremap tp :set paste!<cr>
+nnoremap ts :set spell!<cr>
 
 " Copy and paste
 if has('clipboard')
   vnoremap x "+x
   vnoremap y "+y
 endif
-nnoremap <C-p> :pu<CR>
-vnoremap <C-p> :pu<CR>
-vnoremap <Leader>p "_dP
+nnoremap <c-p> :pu<cr>
+vnoremap <c-p> :pu<cr>
+vnoremap <leader>p "_dP
 
 " Navigation
 nnoremap <space> zz
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap <silent> <C-n> :nohlsearch<CR><Esc>
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
+nnoremap <silent> <c-n> :nohlsearch<cr><esc>
+nnoremap <c-e> 3<c-e>
+nnoremap <c-y> 3<c-y>
 nnoremap 0 g0
 vnoremap 0 g0
 nnoremap $ g$
@@ -174,48 +155,64 @@ vnoremap $ g$
 nnoremap j gj
 nnoremap k gk
 vnoremap k gk
-nnoremap <Leader>bd :bprevious\|bdelete #<CR>
-nnoremap ]b :bnext<CR>
-nnoremap [b :bprevious<CR>
-nnoremap ]B :bfirst<CR>
-nnoremap [B :blast<CR>
-nnoremap ]c :cnext<CR>
-nnoremap [c :cprevious<CR>
-nnoremap ]l :lnext<CR>
-nnoremap [l :lprevious<CR>
-nnoremap ]t :tabnext<CR>
-nnoremap [t :tabprevious<CR>
-nnoremap ]g :GitGutterNextHunk<CR>
-nnoremap [g :GitGutterPrevHunk<CR>
+nnoremap <leader>bd :bprevious\|bdelete #<cr>
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprevious<cr>
+nnoremap ]B :bfirst<cr>
+nnoremap [B :blast<cr>
+nnoremap ]c :cnext<cr>
+nnoremap [c :cprevious<cr>
+nnoremap ]l :lnext<cr>
+nnoremap [l :lprevious<cr>
+nnoremap ]t :tabnext<cr>
+nnoremap [t :tabprevious<cr>
+nnoremap ]g :GitGutterNextHunk<cr>
+nnoremap [g :GitGutterPrevHunk<cr>
 
 " Window management
-nnoremap <Leader>c :pclose<CR>
-inoremap <C-w> <C-o><C-w>
-nnoremap <Leader><C-k> <C-w>K
-nnoremap <Leader><C-j> <C-w>J
-nnoremap <Leader><C-h> <C-w>H
-nnoremap <Leader><C-l> <C-w>L
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap - <C-w>-
-nnoremap + <C-w>+
-nnoremap < <C-w><
-nnoremap > <C-w>>
+nnoremap <leader>c :pclose<cr>
+inoremap <c-w> <c-o><c-w>
+nnoremap <leader><c-k> <c-w>K
+nnoremap <leader><c-j> <c-w>J
+nnoremap <leader><c-h> <c-w>H
+nnoremap <leader><c-l> <c-w>L
+nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap - <c-w>-
+nnoremap + <c-w>+
+nnoremap < <c-w><
+nnoremap > <c-w>>
 
 " Plugins
-nnoremap gd :ALEGoToDefinition<CR>
-nnoremap gh :ALEHover<CR>
-map <Leader>r <Plug>(quickrun)
+nmap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gh :call <SID>show_documentation()<cr>
+nmap <F2> <Plug>(coc-rename)
+nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+  \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+map <leader>r <Plug>(quickrun)
 " }}}
 
 " Functions {{{
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 " }}}
 
 " Auto Commands {{{
 augroup autocommands
   au!
+  au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
   au FileType tex setl spell

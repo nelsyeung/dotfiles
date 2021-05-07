@@ -1,0 +1,9 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["dart", "python"],
+  "coc.preferences.willSaveHandlerTimeout": 5000,
+  "diagnostic.errorSign": "x",
+  "diagnostic.level": "information",
+  "pyright.organizeimports.provider": "isort",
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true
+}
