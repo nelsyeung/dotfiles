@@ -98,7 +98,6 @@ call plug#end()
 
 " Settings
 let g:coc_global_extensions = ['coc-flutter', 'coc-json', 'coc-pyright']
-let g:ctrlp_map = '<leader>f'
 let g:indentLine_char = '|'
 let g:indentLine_color_gui = '#282828'
 let g:vim_markdown_conceal = 0
@@ -137,8 +136,8 @@ if has('clipboard')
   vnoremap x "+x
   vnoremap y "+y
 endif
-nnoremap <c-p> :pu<cr>
-vnoremap <c-p> :pu<cr>
+nnoremap P :pu<cr>
+vnoremap P :pu<cr>
 vnoremap <leader>p "_dP
 
 " Navigation
