@@ -187,9 +187,13 @@ nnoremap > <c-w>>
 " Plugins
 nmap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> gh :call <SID>show_documentation()<cr>
-nmap <F2> <Plug>(coc-rename)
+nmap gn <Plug>(coc-rename)
+nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
 nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
   \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
