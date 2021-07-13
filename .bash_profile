@@ -73,6 +73,8 @@ _pip_completion()
   )
 }
 complete -o default -F _pip_completion pip
+
+venv
 # }}}
 
 # Source system's specific profile
