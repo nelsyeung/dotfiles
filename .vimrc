@@ -215,6 +215,7 @@ endfunction
 " Auto Commands {{{
 augroup autocommands
   au!
+  au BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
   au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
