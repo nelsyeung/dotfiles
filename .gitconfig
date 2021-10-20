@@ -32,6 +32,9 @@
   abbrevCommit = true
   follow = true
 
+[pull]
+	rebase = true
+
 [rebase]
 	autosquash = true
 
