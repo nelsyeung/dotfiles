@@ -20,7 +20,6 @@ setopt null_glob
 unsetopt case_glob
 setopt extended_glob
 
-HISTFILE=~/.zhistory
 HISTSIZE=SAVEHIST=10000
 setopt share_history
 setopt extended_history
