@@ -40,7 +40,8 @@ set undodir=~/.vim/undodir/
 set undofile
 set updatetime=100
 set visualbell t_vb=
-set wildignore+=.git/,.*cache/,node_modules/,.meteor/,__pycache__/,.*env/
+set wildignore+=.git/,.*cache/,.meteor/,.*env/
+set wildignore+=__pycache__/,intermediates/,node_modules/,Pods/
 set wildignorecase
 set wildmenu
 set wildmode=longest:full,full
@@ -101,6 +102,7 @@ let g:coc_global_extensions = ['coc-flutter', 'coc-json', 'coc-pyright']
 let g:indentLine_char = '|'
 let g:indentLine_color_gui = '#282828'
 let g:vim_markdown_conceal = 0
+let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
 " }}}
 
 " Interface {{{
