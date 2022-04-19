@@ -98,7 +98,15 @@ Plug 'thosakwe/vim-flutter'
 call plug#end()
 
 " Settings
-let g:coc_global_extensions = ['coc-flutter', 'coc-json', 'coc-pyright']
+let g:coc_global_extensions = [
+  \ 'coc-eslint',
+  \ 'coc-flutter',
+  \ 'coc-json',
+  \ 'coc-prettier',
+  \ 'coc-pyright',
+  \ 'coc-tsserver',
+  \ 'coc-yaml',
+\ ]
 let g:indentLine_char = '|'
 let g:indentLine_color_gui = '#282828'
 let g:vim_markdown_conceal = 0
