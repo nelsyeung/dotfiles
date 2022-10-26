@@ -217,10 +217,6 @@ alias npmlsg='npm ls -g --depth=0'
 # }}}
 
 # Prompt {{{
-__prompt_newline() {  # {{{
-  [[ $(tput lines) -ge 10 ]] && printf "\n\r" || echo ""
-}  # }}}
-
 __prompt_venv() {  # {{{
   if [[ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
     echo ""
