@@ -54,12 +54,12 @@ preexec() {
 __prompt_command() { # {{{
   local -r reset_color="%f"
 
-  PROMPT="\$(__prompt_newline)"
+  PROMPT=""
   PROMPT+="\$(__prompt_venv)"
   PROMPT+="%F{magenta}@%m$reset_color: "
   PROMPT+="%F{11}%~%b"  # Working directory full path
   PROMPT+="%F{cyan}\$(__prompt_git)"  # Git branch and status
-  PROMPT+="\$(__prompt_newline)"
+  PROMPT+=$'\n'
   PROMPT+="%(?:%{$reset_color%}:%{%F{red}%}) ==>$reset_color "
 }  # }}}
 
