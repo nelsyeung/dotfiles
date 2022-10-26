@@ -28,12 +28,12 @@ __prompt_command() {  # {{{
   local -r lines=$(tput lines)
   local -r reset_color="\[\e[0m\]"
 
-  PS1="\$(__prompt_newline)"
+  PS1=""
   PS1+="\$(__prompt_venv)"
   PS1+="\[\e[0;35m\]@\h$reset_color: "
   PS1+="\[\e[0;33m\]\w"  # Working directory full path
   PS1+="\[\e[0;36m\]\$(__prompt_git)"  # Git branch and status
-  PS1+="\$(__prompt_newline) "
+  PS1+=$'\n'
   PS1+="$([[ $exit_status -eq 0 ]] && echo $reset_color || echo "\[\e[0;31m\]")"
   PS1+=" ==>\[\e[0;37m\] "
 }  # }}}
