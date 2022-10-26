@@ -156,6 +156,16 @@ venv() {
       return
     fi
 
+    local pyproject_path="$search_path/pyproject.toml"
+
+    if ls "$pyproject_path" > /dev/null 2>&1 ; then
+      deactivate 2> /dev/null
+      poetry env use "$(pyenv which python)"
+      readonly env_path="$(poetry env info --path)"
+      [[ -z "$env_path" ]] && poetry shell || source "$env_path/bin/activate"
+      return
+    fi
+
     search_path="$(dirname "$search_path")"
     [ "$search_path" = "/" ] && return
 
@@ -207,7 +217,17 @@ alias npmlsg='npm ls -g --depth=0'
 # }}}
 
 # Prompt {{{
-__prompt__min_lines=10  # Minimum terminal size before prompt changes
+__prompt_newline() {  # {{{
+  [[ $(tput lines) -ge 10 ]] && printf "\n\r" || echo ""
+}  # }}}
+
+__prompt_venv() {  # {{{
+  if [[ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
+    echo ""
+  else
+    [[ -z "$VIRTUAL_ENV" ]] && echo "" || echo "($(basename "$VIRTUAL_ENV")) "
+  fi
+}  # }}}
 
 __prompt_git() { # {{{
   local stat='' # Cannot use the name status because its an internal variable
