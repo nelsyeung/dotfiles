@@ -23,27 +23,17 @@ shopt -s cdspell
 # }}}
 
 # Prompt {{{
-__venv_info() {  # {{{
-  if [[ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
-    if [[ -z "$VIRTUAL_ENV" ]]; then
-      echo ""
-    else
-      echo "($(basename "$VIRTUAL_ENV")) "
-    fi
-  fi
-}  # }}}
-
 __prompt_command() {  # {{{
   local -r exit_status=$?
   local -r lines=$(tput lines)
   local -r reset_color="\[\e[0m\]"
 
-  [[ $lines -ge $__prompt__min_lines ]] && PS1="\n" || PS1=""
-  PS1+="$(__venv_info)"
+  PS1="\$(__prompt_newline)"
+  PS1+="\$(__prompt_venv)"
   PS1+="\[\e[0;35m\]@\h$reset_color: "
   PS1+="\[\e[0;33m\]\w"  # Working directory full path
   PS1+="\[\e[0;36m\]\$(__prompt_git)"  # Git branch and status
-  [[ $lines -ge $__prompt__min_lines ]] && PS1+="\n "
+  PS1+="\$(__prompt_newline) "
   PS1+="$([[ $exit_status -eq 0 ]] && echo $reset_color || echo "\[\e[0;31m\]")"
   PS1+=" ==>\[\e[0;37m\] "
 }  # }}}
