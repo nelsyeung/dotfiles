@@ -47,23 +47,19 @@ zstyle ':completion:*' matcher-list '' \
   # }}}
 
 # Prompt {{{
-TRAPWINCH() {
-  __prompt_command
-}
-
 preexec() {
   print -nP "%f"
 }
 
 __prompt_command() { # {{{
-  local -r lines=$(tput lines)
   local -r reset_color="%f"
 
-  [[ $lines -ge $__prompt__min_lines ]] && PROMPT=$'\n' || PROMPT=""
+  PROMPT="\$(__prompt_newline)"
+  PROMPT+="\$(__prompt_venv)"
   PROMPT+="%F{magenta}@%m$reset_color: "
   PROMPT+="%F{11}%~%b"  # Working directory full path
   PROMPT+="%F{cyan}\$(__prompt_git)"  # Git branch and status
-  [[ $lines -ge $__prompt__min_lines ]] && PROMPT+=$'\n'
+  PROMPT+="\$(__prompt_newline)"
   PROMPT+="%(?:%{$reset_color%}:%{%F{red}%}) ==>$reset_color "
 }  # }}}
 
