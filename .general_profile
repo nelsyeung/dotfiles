@@ -144,6 +144,8 @@ clone() {
   fi
 }
 
+__prev_pyproject_path=""
+
 venv() {
   local search_path="$(pwd)"
 
@@ -151,18 +153,32 @@ venv() {
     local activate_path="$search_path/.venv/bin/activate"
 
     if ls "$activate_path" > /dev/null 2>&1 ; then
+      [[ $pyproject_path == $__prev_pyproject_path ]] && return
+
       deactivate 2> /dev/null
       source "$activate_path"
+
+      if [[ -n $VIRTUAL_ENV ]]; then
+        __prev_pyproject_path="$pyproject_path"
+      fi
+
       return
     fi
 
     local pyproject_path="$search_path/pyproject.toml"
 
     if ls "$pyproject_path" > /dev/null 2>&1 ; then
+      [[ $pyproject_path == $__prev_pyproject_path ]] && return
+
       deactivate 2> /dev/null
       poetry env use "$(pyenv which python)"
       readonly env_path="$(poetry env info --path)"
       [[ -z "$env_path" ]] && poetry shell || source "$env_path/bin/activate"
+
+      if [[ -n $VIRTUAL_ENV ]]; then
+        __prev_pyproject_path="$pyproject_path"
+      fi
+
       return
     fi
 
