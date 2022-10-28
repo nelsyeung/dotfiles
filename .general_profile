@@ -178,6 +178,8 @@ venv() {
 
       if ls "$pyproject_path" > /dev/null 2>&1 ; then
         [[ $pyproject_path == $__prev_pyproject_path ]] && return
+        
+        ! grep tool.poetry "$pyproject_path" > /dev/null 2>&1 && return
 
         deactivate 2> /dev/null
 
