@@ -18,9 +18,11 @@ set lazyredraw
 set linespace=4
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set modeline
+set modelines=5
 set mouse=a
 set noshowmode " Mode is shown using airline instead
 set number
+set re=0
 set ruler
 set scrolloff=3
 set shiftwidth=2
@@ -87,6 +89,7 @@ Plug 'tpope/vim-surround'
 
 " Interface
 Plug 'lifepillar/vim-colortemplate'
+Plug 'lifepillar/vim-solarized8'
 Plug 'nelsyeung/high-contrast', { 'rtp': 'vim' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -108,15 +111,22 @@ let g:coc_global_extensions = [
   \ 'coc-yaml',
 \ ]
 let g:indentLine_char = '|'
-let g:indentLine_color_gui = '#282828'
 let g:vim_markdown_conceal = 0
 let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
 " }}}
 
 " Interface {{{
-set background=dark
-colorscheme high_contrast
-let g:airline_theme='simple'
+set background=light
+" set background=dark
+if &background ==# 'dark'
+  colorscheme high_contrast
+  let g:airline_theme='simple'
+  let g:indentLine_color_gui = '#282828'
+else
+  colorscheme solarized8
+  let g:airline_theme='solarized'
+  let g:indentLine_color_gui = '#eee8d5'
+endif
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_y = airline#section#create([
   \ '%L' . g:airline_symbols.maxlinenr
