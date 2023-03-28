@@ -1,9 +1,13 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["dart", "python"],
-  "coc.preferences.willSaveHandlerTimeout": 5000,
+  "codeLens.enable": true,
   "diagnostic.errorSign": "x",
   "diagnostic.level": "information",
+  "pyright.inlayHints.functionReturnTypes": false,
+  "pyright.inlayHints.variableTypes": false,
   "pyright.organizeimports.provider": "isort",
+  "pyright.testing.provider": "pytest",
+  "python.analysis.typeCheckingMode": "off",
   "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": true
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true
 }
