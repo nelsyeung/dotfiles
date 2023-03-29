@@ -214,9 +214,8 @@ nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
 nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-  \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
+  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 map <leader>r <Plug>(quickrun)
 " }}}
 
