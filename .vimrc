@@ -23,6 +23,7 @@ set mouse=a
 set noshowmode " Mode is shown using airline instead
 set number
 set re=0
+set relativenumber
 set ruler
 set scrolloff=3
 set shiftwidth=2
