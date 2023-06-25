@@ -66,6 +66,10 @@ if has('gui_running')
   else
     set guifont=Cascadia\ Code\ PL:h12
   endif
+
+  if has("gui_macvim")
+    set macligatures
+  endif
 endif
 " }}}
 
