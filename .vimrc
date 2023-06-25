@@ -92,6 +92,7 @@ Plug 'thinca/vim-quickrun'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'voldikss/vim-floaterm'
 
 " Interface
 Plug 'lifepillar/vim-colortemplate'
@@ -119,6 +120,11 @@ let g:coc_global_extensions = [
 let g:indentLine_char = '|'
 let g:vim_markdown_conceal = 0
 let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
+let g:floaterm_keymap_kill = '<leader>fk'
+let g:floaterm_keymap_new = '<leader>fn'
+let g:floaterm_keymap_next = ']f'
+let g:floaterm_keymap_prev = '[f'
+let g:floaterm_keymap_toggle = '<leader>ft'
 " }}}
 
 " Interface {{{
