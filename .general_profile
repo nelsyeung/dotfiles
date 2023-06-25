@@ -144,7 +144,7 @@ clone() {
   fi
 }
 
-__prev_pyproject_path=""
+__prev_venv_path=""
 # These tools might exists later.
 __has_poetry=false
 __has_pyenv=false
@@ -160,40 +160,29 @@ venv() {
   activate_venv() {
     local activate_path="$search_path/.venv/bin/activate"
 
-    if ls "$activate_path" > /dev/null 2>&1 ; then
-      [[ $activate_path == $__prev_pyproject_path ]] && return
+    [[ $activate_path == $__prev_venv_path ]] && [[ -n $VIRTUAL_ENV ]] &&
+      return
 
+    if [[ -f "$activate_path" ]]; then
       deactivate 2> /dev/null
       source "$activate_path"
-
-      if [[ -n $VIRTUAL_ENV ]]; then
-        __prev_pyproject_path="$pyproject_path"
-      fi
-
+      [[ -n $VIRTUAL_ENV ]] && __prev_venv_path="$activate_path"
       return
     fi
 
     if [[ $__has_poetry == true ]]; then
       local pyproject_path="$search_path/pyproject.toml"
 
-      if ls "$pyproject_path" > /dev/null 2>&1 ; then
-        [[ $pyproject_path == $__prev_pyproject_path ]] && return
-        
+      [[ $pyproject_path == $__prev_venv_path ]] && [[ -n $VIRTUAL_ENV ]] &&
+        return
+
+      if [[ -f "$pyproject_path" ]]; then
         ! grep tool.poetry "$pyproject_path" > /dev/null 2>&1 && return
-
         deactivate 2> /dev/null
-
-        if [[ $__has_pyenv == true ]]; then
-          poetry env use "$(pyenv which python)"
-        fi
-
+        [[ $__has_pyenv == true ]] && poetry env use "$(pyenv which python)"
         readonly env_path="$(poetry env info --path)"
         [[ -z "$env_path" ]] && poetry shell || source "$env_path/bin/activate"
-
-        if [[ -n $VIRTUAL_ENV ]]; then
-          __prev_pyproject_path="$pyproject_path"
-        fi
-
+        [[ -n $VIRTUAL_ENV ]] && __prev_venv_path="$pyproject_path"
         return
       fi
     fi
