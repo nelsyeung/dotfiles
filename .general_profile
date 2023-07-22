@@ -146,12 +146,21 @@ clone() {
 
 __prev_venv_path=""
 # These tools might exists later.
+__has_conda=false
+__has_conda_lock=false
 __has_poetry=false
 __has_pyenv=false
 
 venv() {
   local search_path="$(pwd)"
 
+  [[ $__has_conda == false ]] &&
+    __has_conda=$(command -v conda &> /dev/null && echo true || echo false)
+  [[ $__has_conda_lock == false ]] &&
+    __has_conda_lock=$(\
+      command -v conda-lock &> /dev/null && \
+      echo true || echo false\
+    )
   [[ $__has_poetry == false ]] &&
     __has_poetry=$(command -v poetry &> /dev/null && echo true || echo false)
   [[ $__has_pyenv == false ]] &&
@@ -164,10 +173,36 @@ venv() {
       return
 
     if [[ -f "$activate_path" ]]; then
+      conda deactivate 2> /dev/null
       deactivate 2> /dev/null
       source "$activate_path"
       [[ -n $VIRTUAL_ENV ]] && __prev_venv_path="$activate_path"
       return
+    fi
+
+    if [[ $__has_conda == true ]]; then
+      local conda_path="$search_path/environment.yml"
+      local conda_lock_path="$search_path/conda-lock.yml"
+      local env_path="$search_path/.env"
+
+      [[ $env_path == $__prev_venv_path ]] &&
+        [[ $CONDA_DEFAULT_ENV != base ]] &&
+        return
+
+      if [[ -f "$conda_path" ]]; then
+        [[ -d "$env_path" ]] &&
+          conda activate "$env_path" &&
+          __prev_venv_path="$env_path" &&
+          return
+
+        if [[ $__has_conda_lock == true ]] && [[ -f "$conda_lock_path" ]]; then
+          conda-lock install -p "$env_path" "$conda_lock_path"
+        else
+          conda env create -f "$conda_path" -p "$env_path"
+        fi
+
+        conda activate "$env_path" && __prev_venv_path="$env_path" && return
+      fi
     fi
 
     if [[ $__has_poetry == true ]]; then
@@ -178,6 +213,7 @@ venv() {
 
       if [[ -f "$pyproject_path" ]]; then
         ! grep tool.poetry "$pyproject_path" > /dev/null 2>&1 && return
+        conda deactivate 2> /dev/null
         deactivate 2> /dev/null
         [[ $__has_pyenv == true ]] && poetry env use "$(pyenv which python)"
         readonly env_path="$(poetry env info --path)"
