@@ -114,6 +114,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-prettier',
   \ 'coc-pyright',
+  \ 'coc-sh',
   \ 'coc-tsserver',
   \ 'coc-yaml',
 \ ]
@@ -128,8 +129,11 @@ let g:floaterm_keymap_toggle = '<leader>ft'
 " }}}
 
 " Interface {{{
-set background=light
-" set background=dark
+if trim(system("defaults read -g AppleInterfaceStyle 2>/dev/null")) == "Dark"
+  set background=dark
+else
+  set background=light
+endif
 if &background ==# 'dark'
   colorscheme high_contrast
   let g:airline_theme='simple'
