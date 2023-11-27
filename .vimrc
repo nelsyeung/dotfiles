@@ -103,7 +103,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Language specific
 Plug 'sheerun/vim-polyglot'
-Plug 'thosakwe/vim-flutter'
 
 call plug#end()
 
