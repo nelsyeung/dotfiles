@@ -220,15 +220,19 @@ nnoremap < <c-w><
 nnoremap > <c-w>>
 
 " Plugins
+nmap <leader>qf <Plug>(coc-fix-current)
+xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>a <Plug>(coc-codeaction-selected)
 nmap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> gh :call <SID>show_documentation()<cr>
 nmap gn <Plug>(coc-rename)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
-nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+nmap <silent> [e <Plug>(coc-diagnostic-prev)
+nmap <silent> ]e <Plug>(coc-diagnostic-next)
 nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
   \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 map <leader>r <Plug>(quickrun)
@@ -249,7 +253,7 @@ endfunction
 " Auto Commands {{{
 augroup autocommands
   au!
-  au BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
+  au BufWritePre *.py,*.dart :silent call CocAction('runCommand', 'editor.action.organizeImport')
   au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
