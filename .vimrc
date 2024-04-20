@@ -39,8 +39,6 @@ set termguicolors
 set textwidth=80
 set ttimeout " Only wait ttimeoutlen milliseconds for a complete key sequence
 set ttimeoutlen=100
-set undodir=~/.vim/undodir/
-set undofile
 set updatetime=100
 set visualbell t_vb=
 set wildignore+=.git/,.*cache/,.meteor/,.*env/
