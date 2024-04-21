@@ -129,11 +129,16 @@ endif
 " }}}
 
 " Interface {{{
-if trim(system("defaults read -g AppleInterfaceStyle 2>/dev/null")) == "Dark"
-  set background=dark
-else
-  set background=light
+if has('win32')
+  if trim(system('Get-ItemPropertyValue -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme')) == '1'
+    set background=light
+  endif
+elseif has('mac')
+  if trim(system('defaults read -g AppleInterfaceStyle 2>/dev/null')) != "Dark"
+    set background=light
+  endif
 endif
+
 if &background ==# 'dark'
   colorscheme high_contrast
   let g:airline_theme='simple'
@@ -143,6 +148,7 @@ else
   let g:airline_theme='solarized'
   let g:indentLine_color_gui = '#eee8d5'
 endif
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_y = airline#section#create([
   \ '%L' . g:airline_symbols.maxlinenr
