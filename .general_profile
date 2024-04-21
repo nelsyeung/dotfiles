@@ -6,6 +6,8 @@ stty -ixon 2>/dev/null
 # }}}
 
 # Variables {{{
+export VISUAL=vim
+export EDITOR="$VISUAL"
 if [[ $(uname) == "Darwin" ]]; then
   export CLICOLOR=1 # Enable colour support
   export LSCOLORS="dxfxcxexbxegedabagacad"
