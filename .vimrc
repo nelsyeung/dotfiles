@@ -50,6 +50,11 @@ let &colorcolumn = '+1,+'.join(range(2,999),',+')
 let g:tex_flavor = "latex"
 let g:netrw_fastbrowse = 0 " Closes netrw after opening a file
 
+if has('win32')
+  set shell=powershell
+  set shellcmdflag=-c
+endif
+
 " Close the [No Name] buffer that is created when using --remote-silent
 if bufname('%') == ''
   set bufhidden=wipe
