@@ -19,9 +19,6 @@
   sh = stash
   unc = reset --soft HEAD~1
 
-[core]
-	editor = vim
-
 [diff]
 	tool = vimdiff
 
