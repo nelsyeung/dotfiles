@@ -123,6 +123,9 @@ let g:floaterm_keymap_new = '<leader>fn'
 let g:floaterm_keymap_next = ']f'
 let g:floaterm_keymap_prev = '[f'
 let g:floaterm_keymap_toggle = '<leader>ft'
+if has('win32') || has('win64')
+  let g:floaterm_shell = 'powershell'
+endif
 " }}}
 
 " Interface {{{
