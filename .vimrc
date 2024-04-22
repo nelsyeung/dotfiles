@@ -2,6 +2,7 @@
 " Vim Settings {{{
 set autoindent
 set autoread
+set belloff=all
 set clipboard=unnamedplus
 set display+=lastline
 set encoding=utf-8
@@ -40,7 +41,6 @@ set textwidth=80
 set ttimeout " Only wait ttimeoutlen milliseconds for a complete key sequence
 set ttimeoutlen=100
 set updatetime=100
-set visualbell t_vb=
 set wildignore+=.git/,.*cache/,.meteor/,.*env/
 set wildignore+=__pycache__/,intermediates/,node_modules/,Pods/
 set wildignorecase
