@@ -44,7 +44,7 @@ install() {
 
   if [[ $reply =~ ^[Yy]$ ]]; then
     cmd+=". ~"
-		printf "\n$cmd"
+    printf "\n$cmd"
     eval "$cmd"
 
     if [[ $SHELL == *"zsh" ]]; then
