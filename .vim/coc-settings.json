@@ -4,6 +4,7 @@
   "diagnostic.errorSign": "x",
   "diagnostic.level": "information",
   "inlayHint.enable": false,
+  "powershell.integratedConsole.showOnStartup": false,
   "pyright.organizeimports.provider": "isort",
   "pyright.testing.provider": "pytest",
   "python.analysis.typeCheckingMode": "off",
