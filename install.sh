@@ -9,6 +9,7 @@ install() {
     "LICENSE"
     "README.md"
     "install.sh"
+    "profile.ps1"
   )
   local exclude_flags=""
   local msg="These files will be added to or overwritten in the home directory:"
