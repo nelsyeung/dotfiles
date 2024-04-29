@@ -66,6 +66,8 @@ if has('gui_running')
 
   if has('gui_gtk')
     set guifont=Cascadia\ Code\ PL 12
+  elseif has('win32')
+    set guifont=Cascadia\ Mono:h9
   else
     set guifont=Cascadia\ Code\ PL:h12
   endif
