@@ -35,7 +35,7 @@ __prompt_command() {  # {{{
   PS1+="\[\e[0;36m\]\$(__prompt_git)"  # Git branch and status
   PS1+=$'\n'
   PS1+="$([[ $exit_status -eq 0 ]] && echo $reset_color || echo "\[\e[0;31m\]")"
-  PS1+=" ==>$reset_color "
+  PS1+="> $reset_color"
 }  # }}}
 
 export PROMPT_COMMAND=__prompt_command
