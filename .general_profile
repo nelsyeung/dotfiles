@@ -113,8 +113,6 @@ nup() { # {{{
     sudo apt -y autoclean; sudo apt -y autoremove
   fi
 
-  vim +PlugUpgrade +PlugUpdate +PlugClean +qall
-
   type _post_nup > /dev/null && _post_nup
 } # }}}
 
