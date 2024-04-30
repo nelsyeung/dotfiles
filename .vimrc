@@ -65,12 +65,12 @@ if has('gui_running')
   set guicursor+=a:blinkon0
 
   if has('gui_gtk')
-    set guifont=Cascadia\ Code\ PL 12
+    set guifont=Cascadia\ Mono 12
   elseif has('win32')
     set guioptions-=T
     set guifont=Cascadia\ Mono:h9
   else
-    set guifont=Cascadia\ Code\ PL:h12
+    set guifont=Cascadia\ Mono:h12
   endif
 
   if has("gui_macvim")
