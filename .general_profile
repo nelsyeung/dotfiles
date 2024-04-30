@@ -294,28 +294,17 @@ __prompt_git() { # {{{
     # Check if the current directory is in .git before running git checks
     if [[ $(git rev-parse --is-inside-git-dir 2> /dev/null) == false ]]
     then
-      # Ensure the index is up to date
-      git update-index --really-refresh -q &>/dev/null
-
       # Check for uncommitted changes in the index
-      if ! $(git diff --quiet --ignore-submodules --cached); then
-        stat+='+'
-      fi
+      git diff --quiet --ignore-submodules --cached || stat+='+'
 
       # Check for unstaged changes
-      if ! $(git diff-files --quiet --ignore-submodules --); then
-        stat+='!'
-      fi
+      git diff-files --quiet --ignore-submodules -- || stat+='!'
 
       # Check for untracked files
-      if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-        stat+='?'
-      fi
+      [ -n "$(git ls-files --others --exclude-standard)" ] && stat+='?'
 
       # Check for stashed files
-      if $(git rev-parse --verify refs/stash &>/dev/null); then
-        stat+='$'
-      fi
+      git rev-parse --verify refs/stash &>/dev/null && stat+='$'
     fi
 
     # Get the short symbolic ref
