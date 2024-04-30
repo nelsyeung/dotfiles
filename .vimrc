@@ -79,40 +79,7 @@ if has('gui_running')
 endif
 " }}}
 
-" Plugins {{{
-call plug#begin('~/.vim/plugged')
-
-Plug 'Yggdroot/indentLine'
-Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'godlygeek/tabular'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rhysd/git-messenger.vim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'thinca/vim-quickrun'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'voldikss/vim-floaterm'
-
-" Interface
-Plug 'lifepillar/vim-colortemplate'
-Plug 'lifepillar/vim-solarized8'
-Plug 'nelsyeung/high-contrast', { 'rtp': 'vim' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Language specific
-Plug 'sheerun/vim-polyglot'
-
-call plug#end()
-
-" Settings
+" Plugins settings {{{
 let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-flutter',

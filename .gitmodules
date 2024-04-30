@@ -1,0 +1,55 @@
+[submodule ".vim/pack/plugins/start/coc.nvim"]
+	path = .vim/pack/plugins/start/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
+	branch = release
+[submodule ".vim/pack/plugins/start/ctrlp.vim"]
+	path = .vim/pack/plugins/start/ctrlp.vim
+	url = git@github.com:ctrlpvim/ctrlp.vim.git
+[submodule ".vim/pack/plugins/start/editorconfig-vim"]
+	path = .vim/pack/plugins/start/editorconfig-vim
+	url = git@github.com:editorconfig/editorconfig-vim.git
+[submodule ".vim/pack/plugins/start/high-contrast"]
+	path = .vim/pack/plugins/start/high-contrast
+	url = git@github.com:nelsyeung/high-contrast.git
+[submodule ".vim/pack/plugins/start/indentLine"]
+	path = .vim/pack/plugins/start/indentLine
+	url = git@github.com:Yggdroot/indentLine.git
+[submodule ".vim/pack/plugins/start/undotree"]
+	path = .vim/pack/plugins/start/undotree
+	url = git@github.com:mbbill/undotree.git
+[submodule ".vim/pack/plugins/start/vim-airline"]
+	path = .vim/pack/plugins/start/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
+[submodule ".vim/pack/plugins/start/vim-airline-themes"]
+	path = .vim/pack/plugins/start/vim-airline-themes
+	url = git@github.com:vim-airline/vim-airline-themes.git
+[submodule ".vim/pack/plugins/start/vim-colortemplate"]
+	path = .vim/pack/plugins/start/vim-colortemplate
+	url = git@github.com:lifepillar/vim-colortemplate.git
+[submodule ".vim/pack/plugins/start/vim-commentary"]
+	path = .vim/pack/plugins/start/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
+[submodule ".vim/pack/plugins/start/vim-easymotion"]
+	path = .vim/pack/plugins/start/vim-easymotion
+	url = git@github.com:easymotion/vim-easymotion.git
+[submodule ".vim/pack/plugins/start/vim-floaterm"]
+	path = .vim/pack/plugins/start/vim-floaterm
+	url = git@github.com:voldikss/vim-floaterm.git
+[submodule ".vim/pack/plugins/start/vim-fugitive"]
+	path = .vim/pack/plugins/start/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule ".vim/pack/plugins/start/vim-gitgutter"]
+	path = .vim/pack/plugins/start/vim-gitgutter
+	url = git@github.com:airblade/vim-gitgutter.git
+[submodule ".vim/pack/plugins/start/vim-polyglot"]
+	path = .vim/pack/plugins/start/vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot.git
+[submodule ".vim/pack/plugins/start/vim-quickrun"]
+	path = .vim/pack/plugins/start/vim-quickrun
+	url = git@github.com:thinca/vim-quickrun.git
+[submodule ".vim/pack/plugins/start/vim-solarized8"]
+	path = .vim/pack/plugins/start/vim-solarized8
+	url = git@github.com:lifepillar/vim-solarized8.git
+[submodule ".vim/pack/plugins/start/vim-surround"]
+	path = .vim/pack/plugins/start/vim-surround
+	url = git@github.com:tpope/vim-surround.git
