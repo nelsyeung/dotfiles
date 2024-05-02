@@ -61,7 +61,7 @@ emptytrash() {
   if [[ $(uname) == "Darwin" ]]; then
     \rm -rf ~/.Trash/* ~/.Trash/.* 2> /dev/null
   elif [[ $(uname) == "Linux" ]]; then
-    gio trash --empty
+    \rm -rf ~/.local/share/Trash/{files,info}/*
   fi
 }
 
