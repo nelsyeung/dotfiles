@@ -39,14 +39,11 @@ export PATH LD_LIBRARY_PATH
 # Aliases {{{
 # File management {{{
 trash() {
-  if [[ $1 == "-f" || $1 == "-rf" ]]; then
+  local flag="$1"
+  if [[ $flag == "-f" || $flag == "-rf" || $flag == "-fr" ]]; then
     for (( i = 2; i <= $#; i++)); do
       eval f=\$$i
-      if [[ $(uname) == "Darwin" ]]; then
-        eval "command rm -vr $f"
-      elif [[ $(uname) == "Linux" ]]; then
-        eval "command rm -vrI $f"
-      fi
+      eval "command rm $1 $f"
     done
   else
     if [[ $(uname) == "Linux" ]]; then
