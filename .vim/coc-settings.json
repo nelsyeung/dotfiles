@@ -5,10 +5,10 @@
   "diagnostic.level": "information",
   "inlayHint.enable": false,
   "powershell.integratedConsole.showOnStartup": false,
-  "pyright.organizeimports.provider": "isort",
+  "pyright.organizeimports.provider": "ruff",
   "pyright.testing.provider": "pytest",
   "python.analysis.typeCheckingMode": "off",
-  "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": true,
-  "python.linting.mypyEnabled": true
+  "python.formatting.provider": "ruff",
+  "python.linting.mypyEnabled": true,
+  "python.linting.ruffEnabled": true
 }
