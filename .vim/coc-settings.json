@@ -4,6 +4,12 @@
   "diagnostic.errorSign": "x",
   "diagnostic.level": "information",
   "inlayHint.enable": false,
+  "languageserver": {
+    "sourcekit-lsp": {
+      "filetypes": ["swift"],
+      "command": "sourcekit-lsp"
+    }
+  },
   "powershell.integratedConsole.showOnStartup": false,
   "pyright.organizeimports.provider": "ruff",
   "pyright.testing.provider": "pytest",
