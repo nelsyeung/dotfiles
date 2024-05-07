@@ -105,6 +105,7 @@ endif
 " }}}
 
 " Interface {{{
+set background=dark
 if has('win32')
   if trim(system('Get-ItemPropertyValue -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme')) == '1'
     set background=light
