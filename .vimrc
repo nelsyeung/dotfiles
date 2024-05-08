@@ -232,16 +232,27 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+
+function! SwiftFormat()
+  let formatted = system('swift-format', join(getline(1,'$'), "\n"))
+  if v:shell_error == 0
+    let view = winsaveview()
+    :%delete _
+    call setline(1, split(formatted, '\n'))
+    call winrestview(view)
+  endif
+endfunction
 " }}}
 
 " Auto Commands {{{
 augroup autocommands
   au!
   au BufWritePre *.py,*.dart :silent call CocAction('runCommand', 'editor.action.organizeImport')
+  au BufWritePre *.swift :call SwiftFormat()
   au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
-  au FileType python setl textwidth=79
+  au FileType python setl spell textwidth=79
   au FileType swift setl textwidth=100
   au FileType tex setl spell
 augroup END
