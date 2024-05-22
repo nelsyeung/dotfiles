@@ -101,7 +101,7 @@ fi
 
 # Software specifics {{{
 nup() { # {{{
-  type _pre_nup > /dev/null && _pre_nup
+  type _pre_nup &> /dev/null && _pre_nup
 
   if [[ $(uname) == "Darwin" ]]; then
     brew update; brew upgrade; brew cleanup; brew doctor
@@ -110,7 +110,7 @@ nup() { # {{{
     sudo apt -y autoclean; sudo apt -y autoremove
   fi
 
-  type _post_nup > /dev/null && _post_nup
+  type _post_nup &> /dev/null && _post_nup
 } # }}}
 
 gsync() {
