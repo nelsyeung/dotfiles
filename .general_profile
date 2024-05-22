@@ -110,7 +110,14 @@ nup() { # {{{
     sudo apt -y autoclean; sudo apt -y autoremove
   fi
 
-  type _post_nup &> /dev/null && _post_nup
+  local -r return_code=$?
+  
+  if type _post_nup &> /dev/null; then
+    _post_nup
+    return $?
+  fi
+
+  return $return_code
 } # }}}
 
 gsync() {
