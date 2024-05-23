@@ -21,6 +21,7 @@ set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set modeline
 set modelines=5
 set mouse=a
+set nobackup
 set noshowmode " Mode is shown using airline instead
 set number
 set re=0
