@@ -111,7 +111,7 @@ nup() { # {{{
   fi
 
   local -r return_code=$?
-  
+
   if type _post_nup &> /dev/null; then
     _post_nup
     return $?
@@ -242,25 +242,12 @@ cd() {
   venv
 }
 
-dclean() {
-  [ -z "$(docker ps -aq)" ] &&
-    echo "No containers" || docker rm -f $(docker ps -aq)
-
-  [ -z "$(docker images -aq)" ] &&
-    echo "No images" || docker rmi -f $(docker images -aq)
-
-  [ -z "$(docker volume ls -q)" ] &&
-    echo "No volumes" || docker volume prune
-
-  [ "$(echo "$(docker network ls -q)" | wc -l)" -le 3 ] &&
-    echo "No networks" || docker network rm "$networks"
-}
-
 dex() { docker exec -it $1 ${2:-bash}; }
 drm() { docker stop $1; docker rm $1; }
 
 alias dc='docker compose'
 alias dcd='docker compose down'
+alias dclean='docker system prune --all --force --volumes'
 alias dcr='docker compose run'
 alias dcu='docker compose up'
 alias dcud='docker compose up -d'
