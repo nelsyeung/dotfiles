@@ -107,12 +107,21 @@ endif
 
 " Interface {{{
 set background=dark
+let ps_theme_cmd = 'Get-ItemPropertyValue -Path 
+  \ HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize
+  \ -Name AppsUseLightTheme'
 if has('win32')
-  if trim(system('Get-ItemPropertyValue -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme')) == '1'
+  if trim(system(ps_theme_cmd)) == '1'
     set background=light
   endif
 elseif has('mac')
   if trim(system('defaults read -g AppleInterfaceStyle 2>/dev/null')) != "Dark"
+    set background=light
+  endif
+else
+  let output = system('uname -a | grep microsoft')
+  if v:shell_error == 0 &&
+    \ trim(system('powershell.exe -Command "' . ps_theme_cmd . '"')) == '1'
     set background=light
   endif
 endif
