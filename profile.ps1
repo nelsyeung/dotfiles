@@ -29,7 +29,12 @@ function prompt {
 
   $exitStatus = $?
   $esc = [char]27
-  $prompt = "$esc[35m@${env:COMPUTERNAME}: "
+  $loc = $executionContext.SessionState.Path.CurrentLocation;
+  $prompt = ""
+  if ($loc.Provider.Name -eq "FileSystem") {
+    $prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+  }
+  $prompt += "$esc[35m@${env:COMPUTERNAME}: "
   $prompt += "$esc[33m$(Get-Location)"
   $prompt += "$esc[36m$(gitPrompt)"
   $prompt += "`r`n"
