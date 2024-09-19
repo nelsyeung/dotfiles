@@ -262,7 +262,7 @@ augroup autocommands
   au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
   au FileType html setl spell
-  au FileType python setl spell textwidth=79
+  au FileType python setl textwidth=79
   au FileType swift setl textwidth=100
   au FileType tex setl spell
 augroup END
