@@ -220,7 +220,7 @@ venv() {
         conda deactivate 2> /dev/null
         deactivate 2> /dev/null
         [[ $__has_pyenv == true ]] && poetry env use "$(pyenv which python)"
-        readonly env_path="$(poetry env info --path)"
+        env_path="$(poetry env info --path)"
         [[ -z "$env_path" ]] && poetry shell || source "$env_path/bin/activate"
         [[ -n $VIRTUAL_ENV ]] && __prev_venv_path="$pyproject_path"
         return
