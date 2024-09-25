@@ -44,7 +44,7 @@ zstyle ':completion:*' matcher-list '' \
   zstyle ':completion:*:*:*:*:*' menu select
 
   bindkey "^[[3~" delete-char
-  # }}}
+# }}}
 
 # Prompt {{{
 preexec() {
