@@ -25,6 +25,11 @@ setopt share_history
 setopt extended_history
 setopt histignorespace
 
+# If VISUAL or EDITOR is set to vim, vim terminal will run zsh vim mode which
+# unbinds these.
+bindkey "^R" history-incremental-search-backward
+bindkey "^S" history-incremental-search-forward
+
 # Search history via up and down arrows
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
