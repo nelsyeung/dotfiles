@@ -21,6 +21,7 @@ unsetopt case_glob
 setopt extended_glob
 
 HISTSIZE=SAVEHIST=10000
+HISTFILE=~/.zsh_history
 setopt share_history
 setopt extended_history
 setopt histignorespace
