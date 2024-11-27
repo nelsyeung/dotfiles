@@ -92,14 +92,16 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-yaml',
 \ ]
-let g:indentLine_char = '|'
-let g:vim_markdown_conceal = 0
 let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
+let g:floaterm_height = 0.2
 let g:floaterm_keymap_kill = '<leader>fk'
 let g:floaterm_keymap_new = '<leader>fn'
 let g:floaterm_keymap_next = ']f'
 let g:floaterm_keymap_prev = '[f'
 let g:floaterm_keymap_toggle = '<leader>ft'
+let g:floaterm_wintype = 'split'
+let g:indentLine_char = '|'
+let g:vim_markdown_conceal = 0
 if has('win32')
   let g:floaterm_shell = 'powershell'
 endif
