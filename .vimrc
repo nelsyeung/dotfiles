@@ -259,7 +259,7 @@ endfunction
 " Auto Commands {{{
 augroup autocommands
   au!
-  au BufWritePre *.py,*.dart :silent call CocAction('runCommand', 'editor.action.organizeImport')
+  au BufWritePre *.py,*.dart,*.ts,*.tsx :silent call CocAction('runCommand', 'editor.action.organizeImport')
   au BufWritePre *.swift :call SwiftFormat()
   au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
