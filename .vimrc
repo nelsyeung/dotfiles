@@ -35,7 +35,7 @@ set sidescrolloff=5
 set signcolumn=yes
 set smartcase
 set splitbelow
-set synmaxcol=160 " Prevents slow vim on large files
+set synmaxcol=3000 " Prevents slow vim on large files
 set tabstop=2
 set termguicolors
 set textwidth=80
@@ -259,6 +259,7 @@ endfunction
 " Auto Commands {{{
 augroup autocommands
   au!
+  au BufNewFile,BufRead * if empty(&filetype) | setl synmaxcol=160 | endif
   au BufWritePre *.py,*.dart,*.ts,*.tsx :silent call CocAction('runCommand', 'editor.action.organizeImport')
   au BufWritePre *.swift :call SwiftFormat()
   au CursorHold * silent call CocActionAsync('highlight')
