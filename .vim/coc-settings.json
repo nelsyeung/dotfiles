@@ -1,6 +1,6 @@
 {
   "coc.preferences.formatOnSave": true,
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "diagnostic.errorSign": "x",
   "diagnostic.level": "information",
   "inlayHint.enable": false,
