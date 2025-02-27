@@ -23,7 +23,6 @@ set modelines=5
 set mouse=a
 set nobackup
 set noshowmode " Mode is shown using airline instead
-set number
 set re=0
 set relativenumber
 set ruler
@@ -259,6 +258,7 @@ endfunction
 " Auto Commands {{{
 augroup autocommands
   au!
+  au BufEnter * if &buftype == 'terminal' | setlocal norelativenumber signcolumn=no | endif
   au BufNewFile,BufRead * if empty(&filetype) | setl synmaxcol=160 | endif
   au BufWritePre *.py,*.dart,*.ts,*.tsx :silent call CocAction('runCommand', 'editor.action.organizeImport')
   au BufWritePre *.swift :call SwiftFormat()
