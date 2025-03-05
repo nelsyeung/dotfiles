@@ -92,6 +92,7 @@ let g:coc_global_extensions = [
   \ 'coc-yaml',
 \ ]
 let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
+let g:ctrlp_working_path_mode = 'a'
 let g:floaterm_height = 0.2
 let g:floaterm_keymap_kill = '<leader>fk'
 let g:floaterm_keymap_new = '<leader>fn'
