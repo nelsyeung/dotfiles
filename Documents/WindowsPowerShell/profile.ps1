@@ -50,5 +50,90 @@ Set-PSReadLineOption -Colors @{
   Parameter = "Yellow"
 }
 
+$Profile_PrevVenvPath = ""
+# These tools might exists later.
+$Profile_HasPoetry = $false
+$Profile_VenvToolsChecked = $false
+
+function venv {
+  $searchPath = Get-Location
+
+  if (!$Profile_VenvToolsChecked) {
+    $script:Profile_VenvToolsChecked = $true
+    $script:Profile_HasPoetry = [boolean](
+      Get-Command poetry -errorAction SilentlyContinue
+    )
+  }
+
+  function activate {
+    $activatePath = "$searchPath/.venv/Scripts/activate"
+
+    if (
+      ("$activatePath" -eq "$Profile_PrevVenvPath") -and
+      (Test-Path env:VIRTUAL_ENV)
+    ) {
+      return
+    }
+
+    if (Test-Path $activatePath) {
+      if (Get-Command deactivate -errorAction SilentlyContinue) {
+        deactivate 2>$null
+      }
+
+      & "$activatePath"
+
+      if (Test-Path env:VIRTUAL_ENV) {
+        $script:Profile_PrevVenvPath = "$activatePath"
+      }
+
+      return
+    }
+
+
+    if ($Profile_HasPoetry) {
+      $pyprojectPath = "$searchPath/pyproject.toml"
+
+      if (
+        ("$pyprojectPath" -eq "$Profile_PrevVenvPath") -and
+        (Test-Path env:VIRTUAL_ENV)
+      ) {
+        return
+      }
+
+      if (Test-Path $pyprojectPath) {
+        if ((Select-String tool.poetry "$pyprojectPath") -eq $null) {
+          return
+        }
+
+        if (Get-Command deactivate -errorAction SilentlyContinue) {
+          deactivate 2>$null
+        }
+
+        $envPath = poetry env info --path
+
+        if ($envPath) {
+          & "$envPath/Scripts/activate.ps1"
+        }
+        else {
+          poetry shell
+        }
+
+        if (Test-Path env:VIRTUAL_ENV) {
+          $script:Profile_PrevVenvPath = "$pyprojectPath"
+        }
+
+        return
+      }
+    }
+
+    if ($searchPath) {
+      $searchPath = (Get-Item "$searchPath").Parent.FullName
+      activate
+    }
+  }
+
+  activate
+}
+
 Set-Alias -Name g -Value git
 Set-Alias -Name vi -Value vim
