@@ -259,6 +259,8 @@ alias dpsa='docker ps -a'
 alias drmc='docker rm $(docker ps -aqf status=exited)'
 alias drmi='docker rmi $(docker images -aqf dangling=true)'
 alias drun='docker run -it'
+alias gfr='git commit --fixup=HEAD && git -c sequence.editor=: rebase -i HEAD~2'
+alias gfrp='gfr && git push -f'
 alias npmls='npm ls --depth=0'
 alias npmlsg='npm ls -g --depth=0'
 # }}}
