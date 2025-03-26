@@ -86,6 +86,7 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-flutter',
   \ 'coc-json',
+  \ 'coc-markdownlint',
   \ 'coc-powershell',
   \ 'coc-prettier',
   \ 'coc-pyright',
