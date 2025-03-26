@@ -4,6 +4,8 @@ set autoindent
 set autoread
 set belloff=all
 set clipboard=unnamedplus
+set cursorcolumn
+set cursorline
 set display+=lastline
 set encoding=utf-8
 set expandtab
