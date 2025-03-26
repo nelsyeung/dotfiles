@@ -11,6 +11,7 @@
     }
   },
   "powershell.integratedConsole.showOnStartup": false,
+  "prettier.disableLanguages": ["markdown"],
   "pyright.organizeimports.provider": "ruff",
   "pyright.testing.provider": "pytest",
   "python.analysis.typeCheckingMode": "off",
