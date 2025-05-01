@@ -50,6 +50,8 @@ set wildmenu
 set wildmode=longest:full,full
 let &colorcolumn = '+1,+'.join(range(2,999),',+')
 let g:tex_flavor = "latex"
+let g:netrw_banner = 0
+let g:netrw_bufsettings = "noma nomod nonu nobl nowrap ro rnu" " Relative number
 let g:netrw_fastbrowse = 0 " Closes netrw after opening a file
 
 if has('win32')
