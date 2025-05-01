@@ -159,6 +159,7 @@ inoremap <F12> :syntax sync fromstart<cr>
 
 " Toggles
 nnoremap tl :set list!<cr>
+nnoremap tq :call ToggleQuickFix()<cr>
 nnoremap tu :UndotreeToggle<cr>
 nnoremap tc :set cursorline! cursorcolumn!<cr>
 nnoremap tp :set paste!<cr>
@@ -255,6 +256,14 @@ function! SwiftFormat()
     :%delete _
     call setline(1, split(formatted, '\n'))
     call winrestview(view)
+  endif
+endfunction
+
+function! ToggleQuickFix()
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
   endif
 endfunction
 " }}}
