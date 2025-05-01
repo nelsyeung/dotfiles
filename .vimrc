@@ -194,8 +194,8 @@ nnoremap ]b :bnext<cr>
 nnoremap [b :bprevious<cr>
 nnoremap ]B :bfirst<cr>
 nnoremap [B :blast<cr>
-nnoremap ]c :cnext<cr>
-nnoremap [c :cprevious<cr>
+nnoremap ]q :cnext<cr>
+nnoremap [q :cprevious<cr>
 nnoremap ]l :lnext<cr>
 nnoremap [l :lprevious<cr>
 nnoremap ]t :tabnext<cr>
