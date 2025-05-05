@@ -4,41 +4,20 @@
     "actions": 
     [
         {
-            "command": "paste",
-            "id": "User.paste",
-            "keys": "ctrl+shift+v"
-        },
-        {
             "command": 
             {
-                "action": "copy",
-                "singleLine": false
+                "action": "switchToTab",
+                "index": 1
             },
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+shift+c"
+            "id": "User.switchToTab.2A0DA8E0"
         },
         {
             "command": 
             {
                 "action": "switchToTab",
-                "index": 8
+                "index": 0
             },
-            "id": "User.switchToTab.ED268D78",
-            "keys": "alt+9"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "left"
-            },
-            "id": "User.moveFocus.2A0DA8E0",
-            "keys": "alt+h"
-        },
-        {
-            "command": "togglePaneZoom",
-            "id": "User.togglePaneZoom",
-            "keys": "alt+shift+enter"
+            "id": "User.switchToTab.D3F0B923"
         },
         {
             "command": 
@@ -46,13 +25,35 @@
                 "action": "moveFocus",
                 "direction": "right"
             },
-            "id": "User.moveFocus.87C324ED",
-            "keys": "alt+l"
+            "id": "User.moveFocus.87C324ED"
         },
         {
-            "command": "find",
-            "id": "User.find",
-            "keys": "ctrl+shift+f"
+            "command": "paste",
+            "id": "User.paste"
+        },
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 8
+            },
+            "id": "User.switchToTab.ED268D78"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "id": "User.moveFocus.2A0DA8E0"
         },
         {
             "command": 
@@ -61,13 +62,19 @@
                 "split": "down",
                 "splitMode": "duplicate"
             },
-            "id": "User.splitPane.10B260D2",
-            "keys": "alt+shift+d"
+            "id": "User.splitPane.10B260D2"
+        },
+        {
+            "command": "togglePaneZoom",
+            "id": "User.togglePaneZoom"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
         },
         {
             "command": "closePane",
-            "id": "User.closePane",
-            "keys": "alt+w"
+            "id": "User.closePane"
         },
         {
             "command": 
@@ -76,8 +83,7 @@
                 "split": "right",
                 "splitMode": "duplicate"
             },
-            "id": "User.splitPane.FEF0D40B",
-            "keys": "alt+d"
+            "id": "User.splitPane.FEF0D40B"
         },
         {
             "command": 
@@ -85,8 +91,7 @@
                 "action": "switchToTab",
                 "index": 2
             },
-            "id": "User.switchToTab.87C324ED",
-            "keys": "alt+3"
+            "id": "User.switchToTab.87C324ED"
         },
         {
             "command": 
@@ -94,8 +99,7 @@
                 "action": "moveFocus",
                 "direction": "down"
             },
-            "id": "User.moveFocus.F747588A",
-            "keys": "alt+j"
+            "id": "User.moveFocus.F747588A"
         },
         {
             "command": 
@@ -103,26 +107,7 @@
                 "action": "moveFocus",
                 "direction": "up"
             },
-            "id": "User.moveFocus.6CD791B",
-            "keys": "alt+k"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 0
-            },
-            "id": "User.switchToTab.D3F0B923",
-            "keys": "alt+1"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 1
-            },
-            "id": "User.switchToTab.2A0DA8E0",
-            "keys": "alt+2"
+            "id": "User.moveFocus.6CD791B"
         },
         {
             "command": 
@@ -130,8 +115,7 @@
                 "action": "switchToTab",
                 "index": 3
             },
-            "id": "User.switchToTab.6CD791B",
-            "keys": "alt+4"
+            "id": "User.switchToTab.6CD791B"
         },
         {
             "command": 
@@ -139,8 +123,7 @@
                 "action": "switchToTab",
                 "index": 4
             },
-            "id": "User.switchToTab.F747588A",
-            "keys": "alt+5"
+            "id": "User.switchToTab.F747588A"
         },
         {
             "command": 
@@ -148,8 +131,7 @@
                 "action": "switchToTab",
                 "index": 5
             },
-            "id": "User.switchToTab.75247157",
-            "keys": "alt+6"
+            "id": "User.switchToTab.75247157"
         },
         {
             "command": 
@@ -157,8 +139,7 @@
                 "action": "switchToTab",
                 "index": 6
             },
-            "id": "User.switchToTab.787314EB",
-            "keys": "alt+7"
+            "id": "User.switchToTab.787314EB"
         },
         {
             "command": 
@@ -166,14 +147,96 @@
                 "action": "switchToTab",
                 "index": 7
             },
-            "id": "User.switchToTab.D7681B66",
-            "keys": "alt+8"
+            "id": "User.switchToTab.D7681B66"
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
     "disableAnimations": true,
+    "keybindings": 
+    [
+        {
+            "id": "User.closePane",
+            "keys": "alt+w"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+shift+v"
+        },
+        {
+            "id": "User.moveFocus.2A0DA8E0",
+            "keys": "alt+h"
+        },
+        {
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+shift+c"
+        },
+        {
+            "id": "User.switchToTab.ED268D78",
+            "keys": "alt+9"
+        },
+        {
+            "id": "User.switchToTab.75247157",
+            "keys": "alt+6"
+        },
+        {
+            "id": "User.togglePaneZoom",
+            "keys": "alt+shift+enter"
+        },
+        {
+            "id": "User.splitPane.10B260D2",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "User.moveFocus.87C324ED",
+            "keys": "alt+l"
+        },
+        {
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.splitPane.FEF0D40B",
+            "keys": "alt+d"
+        },
+        {
+            "id": "User.switchToTab.87C324ED",
+            "keys": "alt+3"
+        },
+        {
+            "id": "User.moveFocus.F747588A",
+            "keys": "alt+j"
+        },
+        {
+            "id": "User.moveFocus.6CD791B",
+            "keys": "alt+k"
+        },
+        {
+            "id": "User.switchToTab.D3F0B923",
+            "keys": "alt+1"
+        },
+        {
+            "id": "User.switchToTab.2A0DA8E0",
+            "keys": "alt+2"
+        },
+        {
+            "id": "User.switchToTab.6CD791B",
+            "keys": "alt+4"
+        },
+        {
+            "id": "User.switchToTab.F747588A",
+            "keys": "alt+5"
+        },
+        {
+            "id": "User.switchToTab.787314EB",
+            "keys": "alt+7"
+        },
+        {
+            "id": "User.switchToTab.D7681B66",
+            "keys": "alt+8"
+        }
+    ],
     "newTabMenu": 
     [
         {
