@@ -93,6 +93,7 @@ let g:coc_global_extensions = [
   \ 'coc-powershell',
   \ 'coc-prettier',
   \ 'coc-pyright',
+  \ 'coc-rust-analyzer',
   \ 'coc-sh',
   \ 'coc-tsserver',
   \ 'coc-yaml',
@@ -115,7 +116,7 @@ endif
 
 " Interface {{{
 set background=dark
-let ps_theme_cmd = 'Get-ItemPropertyValue -Path 
+let ps_theme_cmd = 'Get-ItemPropertyValue -Path
   \ HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize
   \ -Name AppsUseLightTheme'
 if has('win32')
