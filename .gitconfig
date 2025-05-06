@@ -17,6 +17,7 @@
   r = rebase
   s = status
   sh = stash
+  sm = submodule
   unc = reset --soft HEAD~1
 
 [diff]
