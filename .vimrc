@@ -286,5 +286,6 @@ augroup autocommands
   au FileType python setl textwidth=79
   au FileType swift setl textwidth=100
   au FileType tex setl spell
+  au QuickFixCmdPost [^l]* cwindow
 augroup END
 " }}}
