@@ -194,6 +194,7 @@ nnoremap j gj
 nnoremap k gk
 vnoremap k gk
 nnoremap <leader>bd :bprevious\|bdelete #<cr>
+nnoremap <leader>bc :bprevious\|bdelete #<cr>
 nnoremap <leader>tc :tabclose<cr>
 nnoremap ]b :bnext<cr>
 nnoremap [b :bprevious<cr>
