@@ -109,9 +109,6 @@ let g:floaterm_keymap_toggle = 'tf'
 let g:floaterm_wintype = 'split'
 let g:indentLine_char = '|'
 let g:vim_markdown_conceal = 0
-if has('win32')
-  let g:floaterm_shell = 'powershell'
-endif
 " }}}
 
 " Interface {{{
