@@ -66,8 +66,9 @@ if bufname('%') == ''
 endif
 
 if has('gui_running')
-  set guioptions-=mrL
   set guicursor+=a:blinkon0
+  set guioptions-=mrL
+  set linespace=0
 
   if has('gui_gtk')
     set guifont=Cascadia\ Mono 12
