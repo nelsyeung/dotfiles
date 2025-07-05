@@ -136,6 +136,7 @@ elseif has('mac')
 else
   let output = system('uname -a | grep microsoft')
   if v:shell_error == 0 &&
+    \ executable('powershell.exe') == '1' &&
     \ trim(system('powershell.exe -Command "' . ps_theme_cmd . '"')) == '1'
     set background=light
   endif
