@@ -58,6 +58,7 @@ let g:netrw_winsize = -40
 if has('win32')
   set shell=powershell
   set shellcmdflag=-c
+  set shellslash
 endif
 
 " Close the [No Name] buffer that is created when using --remote-silent
