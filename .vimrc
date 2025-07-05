@@ -121,24 +121,24 @@ let g:vim_markdown_conceal = 0
 " }}}
 
 " Interface {{{
-set background=dark
+set background=light
 let ps_theme_cmd = 'Get-ItemPropertyValue -Path
   \ HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize
   \ -Name AppsUseLightTheme'
 if has('win32')
-  if trim(system(ps_theme_cmd)) == '1'
-    set background=light
+  if trim(system(ps_theme_cmd)) != '1'
+    set background=dark
   endif
 elseif has('mac')
-  if trim(system('defaults read -g AppleInterfaceStyle 2>/dev/null')) != "Dark"
-    set background=light
+  if trim(system('defaults read -g AppleInterfaceStyle 2>/dev/null')) == "Dark"
+    set background=dark
   endif
 else
   let output = system('uname -a | grep microsoft')
   if v:shell_error == 0 &&
     \ executable('powershell.exe') == '1' &&
-    \ trim(system('powershell.exe -Command "' . ps_theme_cmd . '"')) == '1'
-    set background=light
+    \ trim(system('powershell.exe -Command "' . ps_theme_cmd . '"')) != '1'
+    set background=dark
   endif
 endif
 
