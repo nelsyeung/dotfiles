@@ -91,14 +91,21 @@ let g:coc_global_extensions = [
   \ 'coc-flutter',
   \ 'coc-json',
   \ 'coc-markdownlint',
-  \ 'coc-powershell',
   \ 'coc-prettier',
   \ 'coc-pyright',
   \ 'coc-rust-analyzer',
-  \ 'coc-sh',
   \ 'coc-tsserver',
   \ 'coc-yaml',
 \ ]
+if has('win32')
+  let g:coc_global_extensions += [
+    \ 'coc-powershell',
+  \ ]
+else
+  let g:coc_global_extensions += [
+    \ 'coc-sh',
+  \ ]
+endif
 let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
 let g:ctrlp_working_path_mode = 'a'
 let g:floaterm_height = 0.2
