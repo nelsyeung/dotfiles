@@ -244,8 +244,9 @@ nmap gn <Plug>(coc-rename)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [e <Plug>(coc-diagnostic-prev)
 nmap <silent> ]e <Plug>(coc-diagnostic-next)
-nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>i :silent call CocAction('runCommand', 'editor.action.organizeImport')<cr>
 nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
@@ -288,7 +289,6 @@ augroup autocommands
   au!
   au BufEnter * if &buftype == 'terminal' | setlocal norelativenumber signcolumn=no | endif
   au BufNewFile,BufRead * if empty(&filetype) | setl synmaxcol=160 | endif
-  au BufWritePre *.py,*.dart,*.ts,*.tsx :silent call CocAction('runCommand', 'editor.action.organizeImport')
   au BufWritePre *.swift :call SwiftFormat()
   au CursorHold * silent call CocActionAsync('highlight')
   au FileType gitcommit setl spell textwidth=72
@@ -297,5 +297,13 @@ augroup autocommands
   au FileType swift setl textwidth=100
   au FileType tex setl spell
   au QuickFixCmdPost [^l]* cwindow
+
+  " On Windows, it seems that the file finishes writing before the organize
+  " imports operation completes. As a result, the saved file does not include the
+  " final organized import changes, and the editor still considers the file
+  " modified, requiring it to be saved again, indefinitely.
+  if !has('win32') 
+    au BufWritePre *.py,*.dart,*.ts,*.tsx :silent call CocAction('runCommand', 'editor.action.organizeImport')
+  endif
 augroup END
 " }}}
