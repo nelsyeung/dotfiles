@@ -53,6 +53,7 @@ let g:tex_flavor = "latex"
 let g:netrw_banner = 0
 let g:netrw_bufsettings = "noma nomod nonu nobl nowrap ro rnu" " Relative number
 let g:netrw_fastbrowse = 0 " Closes netrw after opening a file
+let g:netrw_keepdir = 0
 let g:netrw_winsize = -40
 
 if has('win32')
