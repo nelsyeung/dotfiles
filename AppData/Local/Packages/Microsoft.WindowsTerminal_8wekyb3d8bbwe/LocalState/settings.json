@@ -4,12 +4,16 @@
     "actions": 
     [
         {
+            "command": "paste",
+            "id": "User.paste"
+        },
+        {
             "command": 
             {
-                "action": "switchToTab",
-                "index": 1
+                "action": "moveFocus",
+                "direction": "right"
             },
-            "id": "User.switchToTab.2A0DA8E0"
+            "id": "User.moveFocus.87C324ED"
         },
         {
             "command": 
@@ -22,14 +26,10 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "right"
+                "action": "switchToTab",
+                "index": 1
             },
-            "id": "User.moveFocus.87C324ED"
-        },
-        {
-            "command": "paste",
-            "id": "User.paste"
+            "id": "User.switchToTab.2A0DA8E0"
         },
         {
             "command": 
@@ -54,6 +54,14 @@
                 "direction": "left"
             },
             "id": "User.moveFocus.2A0DA8E0"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "id": "User.moveFocus.6CD791B"
         },
         {
             "command": 
@@ -89,6 +97,14 @@
             "command": 
             {
                 "action": "switchToTab",
+                "index": 5
+            },
+            "id": "User.switchToTab.75247157"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
                 "index": 2
             },
             "id": "User.switchToTab.87C324ED"
@@ -100,14 +116,6 @@
                 "direction": "down"
             },
             "id": "User.moveFocus.F747588A"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "up"
-            },
-            "id": "User.moveFocus.6CD791B"
         },
         {
             "command": 
@@ -124,14 +132,6 @@
                 "index": 4
             },
             "id": "User.switchToTab.F747588A"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 5
-            },
-            "id": "User.switchToTab.75247157"
         },
         {
             "command": 
@@ -157,32 +157,32 @@
     "keybindings": 
     [
         {
-            "id": "User.closePane",
-            "keys": "alt+w"
-        },
-        {
             "id": "User.paste",
             "keys": "ctrl+shift+v"
         },
         {
-            "id": "User.moveFocus.2A0DA8E0",
-            "keys": "alt+h"
+            "id": "User.closePane",
+            "keys": "alt+w"
         },
         {
             "id": "User.copy.644BA8F2",
             "keys": "ctrl+shift+c"
         },
         {
+            "id": "User.moveFocus.2A0DA8E0",
+            "keys": "alt+h"
+        },
+        {
             "id": "User.switchToTab.ED268D78",
             "keys": "alt+9"
         },
         {
-            "id": "User.switchToTab.75247157",
-            "keys": "alt+6"
-        },
-        {
             "id": "User.togglePaneZoom",
             "keys": "alt+shift+enter"
+        },
+        {
+            "id": "User.switchToTab.75247157",
+            "keys": "alt+6"
         },
         {
             "id": "User.splitPane.10B260D2",
@@ -282,6 +282,7 @@
             {
                 "guid": "{d8e96812-b789-5068-a5ae-10b2fb53e95f}",
                 "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
                 "name": "Ubuntu 24.04.1 LTS",
                 "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
             },
