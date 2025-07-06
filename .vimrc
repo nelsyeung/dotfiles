@@ -165,7 +165,8 @@ let maplocalleader='\\'
 
 nnoremap <c-s> :update<cr>
 inoremap <c-s> <Esc>:update<cr>
-nnoremap <c-x> :Lexplore<cr>
+nnoremap <leader>ea :Lexplore<CR>
+nnoremap <leader>ee :Lexplore %:p:h<CR>
 cmap w!! w !sudo -E tee > /dev/null %
 nnoremap <F12> :syntax sync fromstart<cr>
 inoremap <F12> :syntax sync fromstart<cr>
