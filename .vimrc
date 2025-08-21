@@ -266,7 +266,7 @@ function! s:show_documentation()
 endfunction
 
 function! SwiftFormat()
-  let formatted = system('swift-format', join(getline(1,'$'), "\n"))
+  let formatted = system('swift-format -', join(getline(1,'$'), "\n"))
   if v:shell_error == 0
     let view = winsaveview()
     :%delete _
