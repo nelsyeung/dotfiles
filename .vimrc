@@ -110,6 +110,7 @@ else
 endif
 let g:ctrlp_custom_ignore = 'intermediates\|node_modules\|Pods'
 let g:ctrlp_working_path_mode = 'a'
+let g:floaterm_autoinsert = v:false
 let g:floaterm_height = 0.2
 let g:floaterm_keymap_kill = '<leader>fk'
 let g:floaterm_keymap_new = '<leader>fn'
@@ -302,7 +303,7 @@ augroup autocommands
   " imports operation completes. As a result, the saved file does not include the
   " final organized import changes, and the editor still considers the file
   " modified, requiring it to be saved again, indefinitely.
-  if !has('win32') 
+  if !has('win32')
     au BufWritePre *.py,*.dart,*.ts,*.tsx :silent call CocAction('runCommand', 'editor.action.organizeImport')
   endif
 augroup END
