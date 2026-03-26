@@ -26,6 +26,18 @@ setopt share_history
 setopt extended_history
 setopt histignorespace
 
+autoload -U compinit edit-command-line select-word-style
+compinit
+select-word-style shell
+zle -N edit-command-line
+
+bindkey -v
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+bindkey -M vicmd "k" history-beginning-search-backward
+bindkey -M vicmd "j" history-beginning-search-forward
+bindkey -M vicmd "^x" edit-command-line
+
 # If VISUAL or EDITOR is set to vim, vim terminal will run zsh vim mode which
 # unbinds these.
 bindkey "^R" history-incremental-search-backward
@@ -35,9 +47,8 @@ bindkey "^S" history-incremental-search-forward
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
-autoload -U compinit select-word-style
-compinit
-select-word-style shell
+# Reduces Vim mode switching delay from 0.4s to 10ms.
+export KEYTIMEOUT=1
 
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
