@@ -66,7 +66,7 @@ function venv {
   }
 
   function activate {
-    $activatePath = "$searchPath/.venv/Scripts/activate"
+    $activatePath = "$searchPath/.venv/Scripts/activate.ps1"
 
     if (
       ("$activatePath" -eq "$Profile_PrevVenvPath") -and
