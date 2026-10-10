@@ -43,6 +43,7 @@ function prompt {
   return $prompt
 }
 
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineOption -Colors @{
   Default   = "Yellow"
   Member    = "Yellow"
